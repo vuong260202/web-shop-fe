@@ -1,45 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "antd";
-import Header from "./Header";
-import FetchData from "./FetchData";
-const columns = [
-  {
-    title: "ID",
-    dataIndex: "id",
-  },
-  {
-    title: "Tên sản phẩm",
-    dataIndex: "productName",
-  },
-  {
-    title: "Giá",
-    dataIndex: "price",
-  },
-  {
-    title: "Hãng",
-    dataIndex: "category",
-  },
-  {
-    title: "Số lượng",
-    dataIndex: "total",
-  },
-  {
-    title: "địa chỉ ảnh",
-    dataIndex: "path",
-  },
-  {
-    title: "Size",
-    dataIndex: "size",
-  },
-  {
-    title: "Lần cập nhật cuối",
-    dataIndex: "updateAt",
-  },
-  {
-    title: "",
-    dataIndex: "update"
-  }
-];
+import Header from "../header/Header";
+import FetchData from "../api/FetchData";
+import product from "../defined/Product";
 
 const App = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -115,7 +78,7 @@ const App = () => {
   return (
     <div>
       <Header onSearch={handleSearch}/>
-      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />;
+      <Table rowSelection={rowSelection} columns={product.adminProductColumns} dataSource={data} />;
     </div>
   );
 };

@@ -2,10 +2,10 @@ import { Button, Form, Input } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../style/Login.css";
-import Header from "./Header";
+import "../../style/Login.css";
+import Header from "../header/Header";
 
-const Login = () => {
+const ChangePassword = () => {
   const navigate = useNavigate();
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -29,7 +29,7 @@ const Login = () => {
       if (response.status === 200) {
         setErrorMessage("");
 
-        console.log("set password successful:");
+        console.log("Đổi mật khẩu thành công");
         navigate("/Home");
       } else {
         console.log("Login failed");
@@ -65,8 +65,8 @@ const Login = () => {
           autoComplete="off"
         >
           <Form.Item
-            label="Current password"
-            name="currentPassword"
+            label="Mật khẩu hiện tại"
+            name="current password"
             rules={[
               {
                 required: true,
@@ -80,7 +80,7 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item
-            label="New password"
+            label="Mật khẩu mới"
             name="newPassword"
             rules={[
               {
@@ -118,4 +118,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ChangePassword;

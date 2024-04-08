@@ -1,0 +1,21 @@
+.product-info {
+    flex: 4;
+    background-color: #f1dede;
+}
+
+.product-information {
+    padding: 10px 10px;
+    font-size: 18px;
+    height: 350px
+}
+
+.product-information > div {
+    padding-bottom: 20px;
+}
+
+
+.product-button-detail {
+    align-items: center;
+    text-align: center;
+    height: 50px
+}

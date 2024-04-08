@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "antd";
-import Header from "./Header";
-import FetchData from "./FetchData";
+import {Table, Button, Tabs} from "antd";
+import Header from "./header/Header";
+import FetchData from "./api/FetchData";
+import {useNavigate} from "react-router-dom";
+import AuthService from "../service/AuthService";
+import {get} from "axios";
 const columns = [
   {
-    title: "ID",
-    dataIndex: "id",
+    title: "Người đặt",
+    dataIndex: "buyerName",
   },
   {
     title: "Số điên thoại",
     dataIndex: "numberPhone",
-  },
-  {
-    title: "Tên người dùng",
-    dataIndex: "name",
   },
   {
     title: "Địa chỉ",
@@ -25,19 +24,15 @@ const columns = [
   },
   {
     title: "Số lượng",
-    dataIndex: "total",
-  },
-  {
-    title: "Giá",
-    dataIndex: "amount",
-  },
-  {
-    title: "Ngày tạo",
-    dataIndex: "createAt",
+    dataIndex: "count",
   },
   {
     title: "Tổng số tiền",
-    dataIndex: "amountSum",
+    dataIndex: "totalAmount",
+  },
+  {
+    title: "Ngày đặt hàng",
+    dataIndex: "createdAt",
   },
   {
     title: "Trạng thái",
@@ -49,28 +44,24 @@ const handleClick = (status, transaction) => {
   window.location.reload();
 }
 
-const App = () => {
+const Transaction = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     FetchData.getTransaction().then((res) => {
-      const newData = res.transactions.map((transaction, index) => ({
-        key: index,
-        id: transaction.id,
-        numberPhone: transaction.numberPhone,
-        name: transaction.name,
-        address: transaction.address,
-        productName: transaction.productName,
-        total: transaction.total,
-        amount: transaction.amount,
-        createAt: transaction.createdAt,
-        amountSum: transaction.amountSum,
-        status: transaction.status,
-      }));
-      setData(newData);
+      console.log(">>" + res);
+      if (res === 401 || null) {
+        navigate('/');
+      }
+
+      setData(res);
     })
     .catch((error) => {
+      if (!AuthService.isLoggedIn()) {
+        navigate('/');
+      }
       console.error("Error fetching transaction data: ", error);
     });
   }, [])
@@ -117,19 +108,70 @@ const App = () => {
       },
     ],
   };
-  
+
   const handleSearch = (search) => {}
+
+  const getData = (status) => {
+    console.log(status)
+    FetchData.getTransaction(status).then((res) => {
+      console.log(">>" + res);
+      if (res === 401 || null) {
+        navigate('/');
+      }
+      setData(res);
+    })
+        .catch((error) => {
+          if (!AuthService.isLoggedIn()) {
+            navigate('/');
+          }
+          console.error("Error fetching transaction data: ", error);
+        });
+  }
+
+  const handleData = (status) => {
+    console.log(status)
+    getData(status);
+
+    return <Table rowSelection={rowSelection} columns={columns} dataSource={data} />;
+  }
+
+  const onChange = (key) => {
+    console.log(key);
+  };
+
+  const items = [
+    {
+      key: '1',
+      label: 'Tất cả',
+      children: handleData(),
+    },
+    {
+      key: '2',
+      label: 'Đang chờ',
+      children: handleData("PENDING"),
+    },
+    {
+      key: '3',
+      label: 'Đang xử lý',
+      children: handleData("IN-PROGRESS"),
+    },
+    {
+      key: '4',
+      label: 'Đã hoàn thành',
+      children: handleData("DONE"),
+    },
+  ];
 
   return (
     <div>
       <Header onSearch={handleSearch}/>
-      <div>
-        <Button onClick={() => handleClick('pending', selectedRowKeys.map((key) => data[key].id))}>đang chờ</Button>
-        <Button onClick={() => handleClick('process', selectedRowKeys.map((key) => data[key].id))}>đang xử lý</Button>
-        <Button onClick={() => handleClick('done', selectedRowKeys.map((key) => data[key].id))}>hoàn thành</Button>
-      </div>
-      <Table rowSelection={rowSelection} columns={columns} dataSource={data} />;
+      {/*<div>*/}
+      {/*  <Button onClick={() => handleClick('pending', selectedRowKeys.map((key) => data[key].id))}>đang chờ</Button>*/}
+      {/*  <Button onClick={() => handleClick('process', selectedRowKeys.map((key) => data[key].id))}>đang xử lý</Button>*/}
+      {/*  <Button onClick={() => handleClick('done', selectedRowKeys.map((key) => data[key].id))}>hoàn thành</Button>*/}
+      {/*</div>*/}
+      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
     </div>
   );
 };
-export default App;
+export default Transaction;

@@ -3,8 +3,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/Upload.css";
-import Header from "./Header";
-import FetchData from "./FetchData";
+import Header from "./header/Header";
+import FetchData from "./api/FetchData";
 
 const onFinish = (values) => {
   console.log("Success:", values);

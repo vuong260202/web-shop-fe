@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../style/UpdateProductDetail.css";
 
-import Header from "./Header";
-import FetchData from "./FetchData";
+import Header from "./header/Header";
+import FetchData from "./api/FetchData";
 
 const UpdateProductDetail = () => {
   const { id } = useParams();

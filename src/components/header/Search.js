@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import "../style/Home.css";
+import "../../style/Home.css";
 import Header from './Header';
 
 const ProductItem = ({ product }) => {
