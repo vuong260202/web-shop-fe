@@ -23,10 +23,6 @@ const Header = ({onSearch}) => {
     };
 
   useEffect(() => {
-    // FetchData.getRole().then((res) => {
-    //
-    //     console.log(res.data);
-    // });
   }, []);
 
     return (

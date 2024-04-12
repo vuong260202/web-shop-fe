@@ -1,9 +1,5 @@
 const adminProductColumns = [
     {
-        title: "ID",
-        dataIndex: "id",
-    },
-    {
         title: "Tên sản phẩm",
         dataIndex: "productName",
     },
@@ -20,21 +16,17 @@ const adminProductColumns = [
         dataIndex: "total",
     },
     {
-        title: "địa chỉ ảnh",
-        dataIndex: "path",
-    },
-    {
         title: "Size",
         dataIndex: "size",
     },
     {
         title: "Lần cập nhật cuối",
-        dataIndex: "updateAt",
+        dataIndex: "updatedAt",
     },
     {
-        title: "",
+        title: "Cập nhật",
         dataIndex: "update"
-    }
+    },
 ]
 
 export default {

@@ -1,16 +1,16 @@
-import Login from "../components/authentication/Login";
-import ProductDetail from "../components/product/Detail";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
-import AdminLogin from "../components/admin/auth/Login";
-import Signup from "../components/authentication/Signup";
-import SetPassword from "../components/authentication/SetPassword";
-import Upload from "../components/Upload";
-import Tables from "../components/Transaction";
-import Product from "../components/product/AdminProducts";
-import UpdateProductDetail from "../components/UpdateProductDetails";
-import Home from "../components/Home";
+import SetPassword from "../pages/auth/changePassword.page";
+import Upload from "../pages/admin/Upload.page";
+import Product from "../pages/admin/product/products.page";
+import UpdateProductDetail from "../pages/admin/product/UpdateProductDetails";
 import ProductSearch from "../components/product/ProductSearch";
-import Transaction from "../components/Transaction";
+import ProductDetail from "../pages/product/productDetail.page";
+import Home from "../pages/home/home.page";
+import Filter from "../pages/product/filter.page";
+import Transaction from "../pages/transaction/Transaction.page";
+import LoginPage from "../pages/auth/login.page";
+import AdminLogin from "../components/admin/auth/Login";
+import SignupPage from "../pages/auth/signup.page";
 
 export const routes = [
     {
@@ -26,16 +26,16 @@ export const routes = [
         page: NotFoundPage,
     },
     {
+        path: '/auth/login',
+        page: LoginPage,
+    },
+    {
         path: '/admin/login',
         page: AdminLogin,
     },
     {
-        path: '/auth/login',
-        page: Login
-    },
-    {
         path: '/auth/sign-up',
-        page: Signup,
+        page: SignupPage,
     },
     {
         path: '/change-password',
@@ -51,7 +51,7 @@ export const routes = [
     },
     {
         path: '/admin/transaction',
-        page: Tables,
+        page: Transaction,
     },
     {
         path: '/admin/:id/edit',
@@ -64,5 +64,9 @@ export const routes = [
     {
         path: '/transaction/history',
         page: Transaction
+    },
+    {
+        path: '/search',
+        page: Filter,
     }
 ]

@@ -3,15 +3,12 @@ import config from "../../config";
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import authService from "../../service/AuthService";
-import FetchData from "../api/FetchData";
+import FetchData from "../api/Fetch.api";
 import AuthService from "../../service/AuthService";
 import {UserOutlined} from '@ant-design/icons';
-import Auth from "../authentication/Auth";
 
 const Profile = () => {
     const navigate = useNavigate();
-    const localtion = useLocation();
-    const [value, setValue] = useState("");
 
     const handleLogout = () => {
         authService.deleteTokenAndRole();
