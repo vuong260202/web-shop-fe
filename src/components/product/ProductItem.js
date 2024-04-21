@@ -1,11 +1,17 @@
 import React from "react";
 import {Rate} from "antd";
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({product}) => {
     const [rate, setRate] = React.useState(0);
 
     return (
-        <div style={{width: '200px', height: '330px', marginBottom: "25px", marginLeft: '15px' , backgroundColor: 'rgba(255,255,255,0.8)'}}>
+        <div style={{
+            width: '200px',
+            height: '330px',
+            marginBottom: "25px",
+            marginLeft: '15px',
+            backgroundColor: 'rgba(255,255,255,0.8)'
+        }}>
             <a href={`/${product.id}/detail`}>
                 <div>
                     <a>
@@ -28,26 +34,16 @@ const ProductItem = ({ product }) => {
                     </div>
                     <div style={{display: "flex", height: "40px"}}>
                         <div style={{flex: 1}}>
-                            <Rate allowHalf defaultValue={product.productRate?.totalRate ?? 5} disabled
+                            <Rate allowHalf defaultValue={product.productStatistic?.totalRate ?? 5} disabled
                                   style={{fontSize: "10px"}}/>
                         </div>
                         <div style={{flex: 1.3}}>
-                            đã bán: {product.productCount ? product.productCount.totalCount : 0}
+                            đã bán: {product.productStatistic?.totalCount ?? 0}
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-        // <li className="product-item" key={product.id}>
-        //     <a href={`/${product.id}/detail`}>
-        //         <img
-        //             src={product.path}
-        //             alt="product"
-        //             style={{ width: "200px", height: "auto" }}
-        //         />
-        //     </a>
-        //     <a href={`/${product.id}/detail`}>{product.productName}</a>
-        // </li>
     );
 };
 

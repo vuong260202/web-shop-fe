@@ -1,8 +1,8 @@
 let isLoggedIn = () => {
-    return localStorage.getItem("token") && (localStorage.getItem("token") !== 'undefined');
+    return localStorage.getItem("token") && localStorage.getItem("token") !== 'undefined';
 };
 let getRole = () => {
-    return localStorage.getItem("role");
+    return localStorage.getItem('role') ?? 'user';
 };
 
 let getToken = () => {
@@ -10,22 +10,22 @@ let getToken = () => {
 };
 
 let deleteTokenAndRole = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
+    localStorage.removeItem('role');
+    localStorage.removeItem('token');
 };
 
 let isAdmin = () => {
-    return localStorage.getItem("role") === 'admin';
+    return isLoggedIn() && localStorage.getItem('role') === 'admin';
 };
 let isUser = () => {
-    return localStorage.getItem("role") === 'user';
+    return isLoggedIn() && localStorage.getItem('token') !== 'admin';
 };
 
 let setInfoAccount = (data) => {
-    localStorage.setItem('role', data.role)
-    localStorage.setItem('token', data.token)
-
-    console.log("Account role: " + data.role);
+    localStorage.setItem('token', data.token);
+    if (data.role === 'admin') {
+        localStorage.setItem('role', 'admin');
+    }
 };
 
 export default {

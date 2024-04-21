@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { Carousel } from 'antd';
+import {Carousel} from 'antd';
 import FetchApi from "../api/Fetch.api";
+
 const contentStyle = {
     margin: 0,
     height: '160px',
@@ -15,7 +16,7 @@ const CarouselHome = () => {
     useEffect(() => {
         FetchApi.bannerAPI.all().then(
             res => {
-                if(res === null) return;
+                if (res === null) return;
                 setBanners(res.banners.map(banner => {
                     return {
                         src: banner.path,

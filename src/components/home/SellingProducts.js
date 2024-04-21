@@ -1,4 +1,3 @@
-import config from '../../config'
 import ProductItem from "../product/ProductItem";
 import React from "react";
 

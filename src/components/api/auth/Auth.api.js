@@ -1,10 +1,14 @@
 import axios from "axios";
+import AuthService from "../../../service/AuthService";
+import CONFIG from "../../../config"
+import serverAPI from "../../../utils/serverAPI";
+import APIService from "../../../service/APIService";
 
 const getRole = async () => {
     try {
         const res = await axios.get("http://localhost:3000/auth/get-role", {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${AuthService.getToken()}`,
             },
         });
 
@@ -39,9 +43,13 @@ const signup = async (attributes) => {
     }
 };
 
-const forgotPassword = async (attributes) => {
+const logout = async () => {
     try {
-        const res = await axios.post("http://localhost:3000/auth/signup", attributes);
+        const res = await axios.get("http://localhost:3000/auth/logout", {
+            headers: {
+                Authorization: `Bearer ${AuthService.getToken()}`,
+            },
+        });
 
         return res;
     } catch (error) {
@@ -49,20 +57,47 @@ const forgotPassword = async (attributes) => {
     }
 };
 
-const updatePassword = async (attributes) => {
-    try {
-        const res = await axios.post("http://localhost:3000/auth/signup", attributes);
+const resetPassword = async (body) => {
+    const response = await axios.put(
+        CONFIG.server.url + serverAPI.url.resetPassword,
+        body
+    ).then(response => APIService.handleResponseSuccess(response))
+        .catch(response => APIService.handleResponse(response));
 
-        return res;
-    } catch (error) {
-        return error.response;
-    }
+    return response;
+};
+
+const sendRequestToMail = async (body) => {
+    const response = await axios.post(
+        CONFIG.server.url + serverAPI.url.sendRequestToMail,
+        body
+    ).then(response => APIService.handleResponseSuccess(response))
+        .catch(response => APIService.handleResponse(response));
+
+    return response;
+};
+
+const updatePassword = async (body) => {
+    const response = await axios.put(
+        CONFIG.server.url + serverAPI.url.changePassword,
+        body,
+        {
+            headers: {
+                Authorization: `Bearer ${AuthService.getToken()}`,
+            },
+        }
+    ).then(res => APIService.handleResponseSuccess(res))
+        .catch(res => APIService.handleResponse(res));
+
+    return response;
 };
 
 export default {
     getRole,
     login,
+    logout,
     signup,
-    forgotPassword,
+    resetPassword,
     updatePassword,
+    sendRequestToMail,
 }

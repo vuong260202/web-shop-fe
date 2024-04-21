@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import {Table, Button, Tabs, notification, Popconfirm} from "antd";
+import React, {useEffect, useState} from "react";
+import {Button, notification, Popconfirm, Tabs} from "antd";
 import Header from "../../components/header/Header";
 import FetchData from "../../components/api/Fetch.api";
 import {useNavigate} from "react-router-dom";
 import transaction from "../../components/defined/Transaction";
 import TableTransaction from "../../components/transaction/Table.transaction";
 import message from "../../service/MessageService";
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import {QuestionCircleOutlined} from '@ant-design/icons';
 
 const Transaction = () => {
     const [data, setData] = useState([]);
@@ -24,7 +24,8 @@ const Transaction = () => {
         });
     };
 
-    const handleSearch = (search) => {}
+    const handleSearch = (search) => {
+    }
 
     const getData = (status) => {
         console.log(status)
@@ -33,11 +34,14 @@ const Transaction = () => {
         }).then((res) => {
             res.map((transaction) => {
                 transaction.key = transaction.id;
+                transaction.productName = <a href={`/${transaction.id}/detail`}>{transaction.productName}</a>;
             })
             console.log(res)
             setData(res);
         });
     }
+
+
 
     const handleData = (status) => {
         console.log(status)
@@ -45,26 +49,26 @@ const Transaction = () => {
     }
 
     const onChange = (key) => {
-        if(key === keyTabs) return;
+        if (key === keyTabs) return;
         setKeyTabs(key);
 
         console.log(items[0])
         switch (key) {
             case '1':
                 handleData(transaction.STATUS.ALL);
-                items[key-1].children = <TableTransaction data={data}/>
+                items[key - 1].children = <TableTransaction data={data}/>
                 break;
             case '2':
                 handleData(transaction.STATUS.PENDING);
-                items[key-1].children = <TableTransaction data={data}/>
+                items[key - 1].children = <TableTransaction data={data}/>
                 break;
             case '3':
                 handleData(transaction.STATUS.IN_PROGRESS);
-                items[key-1].children = <TableTransaction data={data}/>
+                items[key - 1].children = <TableTransaction data={data}/>
                 break;
             case '4':
                 handleData(transaction.STATUS.DONE);
-                items[key-1].children = <TableTransaction data={data}/>
+                items[key - 1].children = <TableTransaction data={data}/>
                 break;
             default:
         }
@@ -73,16 +77,16 @@ const Transaction = () => {
     const handleRowKeys = (selectRowKeys) => {
         if (selectRowKeys.length > 0) {
             setSelectData(data.filter(dt => selectRowKeys.includes(dt.key)));
-            setIsDisable(false);
+                setIsDisable(false);
         } else {
             setSelectData(null);
             setIsDisable(true);
         }
     }
 
-    const handleClick = () => {
+    const handleDelete = () => {
         let isAccept = false;
-        selectData.forEach(sdt => {
+        selectData?.forEach(sdt => {
             if (sdt.status !== transaction.STATUS.PENDING) {
                 isAccept = true;
             }
@@ -99,26 +103,35 @@ const Transaction = () => {
         }
     }
 
+    const handleAccept = () => {
+        let transactionIds = selectData.map(sdt => sdt.id);
+        console.log(transactionIds);
+        FetchData.admin.transactionAPI.update({transactionIds: transactionIds}).then((res) => {
+            openNotification(message.contextType.success.updateTransaction);
+            setTimeout(() => window.location.reload(), 1000)
+        });
+    }
+
     const items = [
         {
             key: '1',
             label: 'Tất cả',
-            children:  <TableTransaction data={data} handleRowKeys={handleRowKeys}/>,
+            children: <TableTransaction data={data} handleRowKeys={handleRowKeys}/>,
         },
         {
             key: '2',
             label: 'Đang chờ',
-            children:  <TableTransaction data={data}/>,
+            children: <TableTransaction data={data} handleRowKeys={handleRowKeys}/>,
         },
         {
             key: '3',
             label: 'Đang xử lý',
-            children:  <TableTransaction data={data}/>,
+            children: <TableTransaction data={data} handleRowKeys={handleRowKeys}/>,
         },
         {
             key: '4',
             label: 'Đã hoàn thành',
-            children:  <TableTransaction data={data}/>,
+            children: <TableTransaction data={data} handleRowKeys={handleRowKeys}/>,
         },
     ];
 
@@ -126,6 +139,7 @@ const Transaction = () => {
         FetchData.transactionAPI.filters().then((res) => {
             res.map((transaction) => {
                 transaction.key = transaction.id;
+                transaction.productName = <a href={`/${transaction.product.id}/detail`}>{transaction.productName}</a>;
             })
             setData(res);
         });
@@ -135,21 +149,27 @@ const Transaction = () => {
         <div>
             <Header onSearch={handleSearch}/>
             <div style={{height: "50px", display: "flex"}}>
-                <nav style={{flex: 4}}>
-
-                </nav>
-                <div style={{flex: 1, alignItems: "screenLeft"}}>
+                <nav style={{flex: 2}} />
+                <div style={{flex: 1, alignItems: "screenLeft", display: "flex"}}>
                     <Popconfirm
-                        title="Delete the task"
-                        description="Are you sure to delete this task?"
-                        icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-                        onConfirm={handleClick}
+                        title="Xác nhận"
+                        description="Cho phép giao dịch thực hiện?"
+                        icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
+                        onConfirm={handleAccept}
+                    >
+                        <Button danger disabled={isDisable}>Xác thực</Button>
+                    </Popconfirm>
+                    <Popconfirm
+                        title="Xác nhận"
+                        description="Bạn có chắc muốn xóa?"
+                        icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
+                        onConfirm={handleDelete}
                     >
                         <Button danger disabled={isDisable}>Delete</Button>
                     </Popconfirm>
                 </div>
             </div>
-            <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+            <Tabs defaultActiveKey="1" items={items} onChange={onChange}/>
             {contextHolder}
         </div>
     );

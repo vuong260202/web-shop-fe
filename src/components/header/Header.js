@@ -1,12 +1,13 @@
-import {Button, Col, Dropdown, Input, Row, Space} from "antd";
+import {Button, Col, Input, Row} from "antd";
 import React, {useEffect, useState} from "react";
 import "../../style/Header.css";
-import {UserOutlined, SearchOutlined} from '@ant-design/icons';
+import {SearchOutlined} from '@ant-design/icons';
 
 import AuthService from "../../service/AuthService";
 import Profile from "./Profile";
 import Auththen from "./Auththen";
-const { Search } = Input;
+
+const {Search} = Input;
 
 const Header = ({onSearch}) => {
     const [value, setValue] = useState("");
@@ -22,8 +23,8 @@ const Header = ({onSearch}) => {
         onSearch(value);
     };
 
-  useEffect(() => {
-  }, []);
+    useEffect(() => {
+    }, []);
 
     return (
         <div>
@@ -36,23 +37,25 @@ const Header = ({onSearch}) => {
                 </Col>
                 <Col span={14}>
                     <div style={{display: "flex", alignItems: "center"}}>
-                    <Input
-                        size="large"
-                        placeholder="input search text"
-                        onChange={(e) => {setValue(e.target.value)}}
-                        onKeyPress={handleSearchPress}
-                        style={{flex: 7}} />
-                    <Button
-                        bordered={false}
-                        size="large"
-                        style={{flex: 1}}
-                        onClick={handleClickSearch}
-                        icon={<SearchOutlined/>} />
-                        <nav style={{flex: 1}} />
+                        <Input
+                            size="large"
+                            placeholder="input search text"
+                            onChange={(e) => {
+                                setValue(e.target.value)
+                            }}
+                            onKeyPress={handleSearchPress}
+                            style={{flex: 7}}/>
+                        <Button
+                            bordered={false}
+                            size="large"
+                            style={{flex: 1}}
+                            onClick={handleClickSearch}
+                            icon={<SearchOutlined/>}/>
+                        <nav style={{flex: 1}}/>
                     </div>
                 </Col>
                 <Col span={5}>
-                    {AuthService.isLoggedIn() ? <Profile /> : <Auththen />}
+                    {AuthService.isLoggedIn() ? <Profile/> : <Auththen/>}
                 </Col>
             </Row>
         </div>

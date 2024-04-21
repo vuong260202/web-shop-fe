@@ -8,7 +8,7 @@ const add = async (conditions) => {
         conditions,
         {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${AuthService.getToken()}`,
             },
         }
     ).then(response => response.data.data).catch(response => APIService.handleResponse(response))
@@ -40,16 +40,26 @@ const remove = async (body) => {
         console.log(res);
         return res;
     } catch (error) {
-        if (error.response && error.response.status === 401) {
-            localStorage.setItem("token", "null");
-        }
-
         console.error("Error fetching product:", error);
     }
 };
+
+const getTransactionUser = async ({productId}) => {
+    const res = await axios.get(`https://localhost:3000/transaction/${productId}/transaction-detail`, {
+        headers: {
+            Authorization: `Bearer ${AuthService.getToken()}`,
+        }
+    }).then(response => APIService.handleResponseSuccess(response))
+        .catch(response => APIService.handleResponse(response));
+
+    console.log(res);
+
+    return res;
+}
 
 export default {
     add,
     filters,
     remove,
+    getTransactionUser,
 }

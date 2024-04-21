@@ -1,4 +1,3 @@
-
 const details = (product) => {
     console.log(product);
     return [

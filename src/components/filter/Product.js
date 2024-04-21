@@ -2,7 +2,6 @@ import React from "react";
 import ProductItem from "../product/ProductItem";
 
 
-
 const Product = ({data}) => {
 
 

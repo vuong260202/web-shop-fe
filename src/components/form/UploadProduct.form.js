@@ -1,6 +1,6 @@
-import {Button, Form, Input, message, Select, Upload} from "antd";
+import {Button, Form, Input, Select} from "antd";
 import React, {useState} from "react";
-import FetchApi from "../api/Fetch.api";
+
 const UploadProduct = ({handleProduct, handleFileChange, data}) => {
     const [file, setFile] = useState(null);
     const [productName, setProductName] = useState(null);
@@ -14,7 +14,6 @@ const UploadProduct = ({handleProduct, handleFileChange, data}) => {
         formData.append("productName", productName);
         formData.append("price", price);
         formData.append("sizes", sizes);
-        console.log(category);
         formData.append("categoryId", category.value);
         formData.append("total", total);
         formData.append("file", file);
@@ -23,73 +22,82 @@ const UploadProduct = ({handleProduct, handleFileChange, data}) => {
     }
 
     return (<Form
-                name="basic"
-                labelCol={{
-                    span: 6,
-                }}
-                wrapperCol={{
-                    span: 13,
-                }}
+        name="basic"
+        labelCol={{
+            span: 6,
+        }}
+        wrapperCol={{
+            span: 13,
+        }}
+        style={{
+            maxWidth: 600,
+            marginTop: "20px",
+        }}
+        initialValues={{
+            remember: true,
+        }}
+        autoComplete="off"
+    >
+        <Form.Item
+            label="Tên sản phẩm"
+            name="productName"
+        >
+            <Input style={{
+                width: "300px",
+            }} onChange={(e) => setProductName(e.target.value)}/>
+        </Form.Item>
+
+        <Form.Item
+            label="Hãng"
+            name="categoryName"
+        >
+            <Select
+                defaultValue="Choose"
                 style={{
-                    maxWidth: 600,
-                    marginTop: "20px",
+                    width: "300px",
                 }}
-                initialValues={{
-                    remember: true,
-                }}
-                autoComplete="off"
-            >
-                <Form.Item
-                    label="Tên sản phẩm"
-                    name="productName"
-                >
-                    <Input onChange={(e) => setProductName(e.target.value)}/>
-                </Form.Item>
+                onChange={(value, category) => setCategory(category)}
+                options={data}
+            />
+        </Form.Item>
+        <Form.Item
+            label="Kích thước"
+            name="sizes"
+        >
+            <Input style={{
+                width: "300px",
+            }} onChange={(e) => setSizes(e.target.value)}/>
+        </Form.Item>
+        <Form.Item
+            label="Giá"
+            name="price"
+        >
+            <Input style={{
+                width: "300px",
+            }} onChange={(e) => setPrice(e.target.value)}/>
+        </Form.Item>
+        <Form.Item
+            label="Số lượng"
+            name="total"
+        >
+            <Input style={{
+                width: "300px",
+            }} onChange={(e) => setTotal(e.target.value)} type={"number"}/>
+        </Form.Item>
+        <Form.Item
+            label="Ảnh"
+            name="file"
+            style={{alignItems: "center"}}
+        >
+            <input type="file" style={{height: "20px"}} onChange={(event) => {
+                setFile(event.target.files[0]);
+                handleFileChange(event);
+            }}/>
+        </Form.Item>
 
-                <Form.Item
-                    label="Hãng"
-                    name="categoryName"
-                >
-                    <Select
-                        defaultValue="Choose"
-                        style={{
-                            width: 250,
-                        }}
-                        onChange={(value, category) => setCategory(category)}
-                        options={data}
-                    />
-                </Form.Item>
-                <Form.Item
-                    label="Kích thước"
-                    name="sizes"
-                >
-                    <Input onChange={(e) => setSizes(e.target.value)}/>
-                </Form.Item>
-                <Form.Item
-                    label="Giá"
-                    name="price"
-                >
-                    <Input onChange={(e) => setPrice(e.target.value)}/>
-                </Form.Item>
-                <Form.Item
-                    label="Số lượng"
-                    name="total"
-                >
-                    <Input onChange={(e) => setTotal(e.target.value)} type={"number"}/>
-                </Form.Item>
-                <Form.Item
-                    label="Ảnh"
-                    name="file"
-                >
-                    <input type="file" onChange={(event) => {
-                        setFile(event.target.files[0]);
-                        handleFileChange(event);
-                    }}/>
-                </Form.Item>
-
-                <Form.Item style={{alignItems: "center", textAlign: "center"}}>
-                    <Button  type="primary" htmlType="submit" onClick={handleClick}>Thêm</Button>
-                </Form.Item>
+        <Form.Item style={{marginLeft: "70px"}}>
+            <Button type="primary" htmlType="submit" onClick={handleClick}>Thêm</Button>
+        </Form.Item>
     </Form>);
 }
 

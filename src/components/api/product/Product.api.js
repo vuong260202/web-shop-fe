@@ -1,22 +1,19 @@
 import axios from "axios";
 import APIService from "../../../service/APIService";
+import AuthService from "../../../service/AuthService";
 
 const update = async (body) => {
     console.log('body:', body);
     try {
         const res = await axios.post("http://localhost:3000/product/update-product", body, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${AuthService.getToken()}`,
             },
         });
 
         console.log(res);
         return res.data.data;
     } catch (error) {
-        if (error.response && error.response.status === 401) {
-            localStorage.setItem("token", "null");
-        }
-
         console.error("Error fetching product:", error);
     }
 };
@@ -28,11 +25,11 @@ const detail = async (id) => {
         `http://localhost:3000/product/product-detail/${id}`,
         {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${AuthService.getToken()}`,
             },
         }
     ).then(response => response.data.data)
-            .catch(response => APIService.handleResponse(response));
+        .catch(response => APIService.handleResponse(response));
     console.log("response: ", response);
     return response;
 };
@@ -43,7 +40,7 @@ const filters = async (conditions) => {
         conditions,
         {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${AuthService.getToken()}`,
             },
         }
     )

@@ -1,5 +1,3 @@
-
-
 const all = async () => {
     return null;
 }

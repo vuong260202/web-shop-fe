@@ -16,7 +16,8 @@ const TableTransaction = ({data, handleRowKeys}) => {
     };
 
     return (
-        <Table rowSelection={rowSelection} columns={transaction.columns} dataSource={data} style={{alignItems: "center"}}/>
+        <Table rowSelection={rowSelection} columns={transaction.columns} dataSource={data}
+               style={{alignItems: "center"}}/>
     )
 }
 

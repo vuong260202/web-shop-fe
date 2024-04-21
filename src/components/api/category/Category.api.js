@@ -1,13 +1,17 @@
 import axios from "axios";
 import AuthService from "../../../service/AuthService";
 import APIService from "../../../service/APIService";
+import ServerAPI from "../../../utils/serverAPI";
+import CONFIG from "../../../config"
 
 const all = async () => {
-    const res = await axios.get("http://localhost:3000/category/all", {
-        headers: {
-            Authorization: `Bearer ${AuthService.getToken()}`,
+    const res = await axios.get(
+        CONFIG.server.url + "/category/all",
+        {
+            headers: {
+                Authorization: `Bearer ${AuthService.getToken()}`,
         },
-    }).then(response => response.data.data)
+    }).then(response => APIService.handleResponseSuccess(response))
         .catch(response => APIService.handleResponse(response))
 
     return res;
@@ -16,6 +20,7 @@ const all = async () => {
 const update = () => {
 
 }
+
 
 export default {
     all,

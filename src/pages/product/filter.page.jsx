@@ -1,5 +1,5 @@
-import { Pagination } from 'antd';
-import React, { useEffect, useState } from "react";
+import {Pagination} from 'antd';
+import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from 'react-router-dom';
 import "../../style/Home.css";
 import Header from '../../components/header/Header'
@@ -18,7 +18,7 @@ const Filter = () => {
         console.log(query + "||" + searchQuery)
         const conditions = {
             page: page,
-            searchQuery: searchQuery? searchQuery : query,
+            searchQuery: searchQuery ? searchQuery : query,
         }
 
         if (searchQuery && searchQuery !== query) {
@@ -47,10 +47,10 @@ const Filter = () => {
 
     return (
         <div>
-            <Header onSearch={handleSearch} />
+            <Header onSearch={handleSearch}/>
             <Product data={products}/>
             <div className="pageination">
-                <Pagination current={page} defaultCurrent={1} total={total} onChange={(newPage) => setPage(newPage)} />
+                <Pagination current={page} defaultCurrent={1} total={total} onChange={(newPage) => setPage(newPage)}/>
             </div>
         </div>
     );

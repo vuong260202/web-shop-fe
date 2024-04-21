@@ -10,12 +10,13 @@
 }
 
 .product-information > div {
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
 
 
 .product-button-detail {
     align-items: center;
     text-align: center;
+    margin-top: 70px;
     height: 50px
 }

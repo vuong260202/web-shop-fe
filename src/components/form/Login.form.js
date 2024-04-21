@@ -1,5 +1,5 @@
 import {Button, Form, Input, notification} from "antd";
-import React, {useMemo, useState} from "react";
+import React, {useState} from "react";
 import FetchData from "../api/Fetch.api";
 import AuthService from "../../service/AuthService";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -34,7 +34,7 @@ const LoginForm = ({role}) => {
             username,
             password,
             role: role
-        }).then((response)=>{
+        }).then((response) => {
             const res = response
             AuthService.setInfoAccount(response.data);
 
@@ -52,8 +52,8 @@ const LoginForm = ({role}) => {
     return (
         <Form className="login-form" name="login"
               style={{margin: "40px 0"}}
-              labelCol={{ span: 8, }}
-              wrapperCol={{ span: 16, }}
+              labelCol={{span: 8,}}
+              wrapperCol={{span: 16,}}
 
               initialValues={{
                   remember: true,
@@ -64,7 +64,7 @@ const LoginForm = ({role}) => {
                 <Input onChange={(e) => setUsername(e.target.value)}/>
             </Form.Item>
 
-            <Form.Item label="Mật khẩu" name="password" >
+            <Form.Item label="Mật khẩu" name="password">
                 <Input.Password onChange={(e) => setPassword(e.target.value)}/>
             </Form.Item>
 
@@ -74,7 +74,7 @@ const LoginForm = ({role}) => {
                     span: 16,
                 }}
             >
-                <Button type="primary" htmlType="submit" onClick={handleLogin} style={{ margin: "20px 30px",}}>
+                <Button type="primary" htmlType="submit" onClick={handleLogin} style={{margin: "20px 30px",}}>
                     Submit
                 </Button>
             </Form.Item>

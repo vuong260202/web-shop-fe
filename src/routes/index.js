@@ -11,6 +11,9 @@ import Transaction from "../pages/transaction/Transaction.page";
 import LoginPage from "../pages/auth/login.page";
 import AdminLogin from "../components/admin/auth/Login";
 import SignupPage from "../pages/auth/signup.page";
+import ForgotPasswordPage from "../pages/auth/forgotPassword.page";
+import AdminManages from "../pages/admin/product/manages.page";
+import ChangeProductPage from "../pages/admin/update/changeProduct.page";
 
 export const routes = [
     {
@@ -42,12 +45,12 @@ export const routes = [
         page: SetPassword,
     },
     {
-        path: '/admin/upload',
-        page: Upload,
+        path: '/auth/forgot-password',
+        page: ForgotPasswordPage,
     },
     {
-        path: '/admin/products',
-        page: Product,
+        path: '/admin/upload',
+        page: Upload,
     },
     {
         path: '/admin/transaction',
@@ -68,5 +71,13 @@ export const routes = [
     {
         path: '/search',
         page: Filter,
+    },
+    {
+        path: '/admin/manage',
+        page: AdminManages
+    },
+    {
+        path: '/admin/:productId/update',
+        page: ChangeProductPage,
     }
 ]

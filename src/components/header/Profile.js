@@ -1,17 +1,18 @@
-import {Dropdown, Space} from "antd";
-import config from "../../config";
-import React, {useEffect, useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
+import {Dropdown} from "antd";
+import React from "react";
+import {useNavigate} from "react-router-dom";
 import authService from "../../service/AuthService";
-import FetchData from "../api/Fetch.api";
 import AuthService from "../../service/AuthService";
 import {UserOutlined} from '@ant-design/icons';
+import FetchApi from "../api/Fetch.api";
 
 const Profile = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
         authService.deleteTokenAndRole();
+        FetchApi.authAPI.logout();
+        window.location.reload();
         navigate("/");
     };
 
@@ -24,11 +25,11 @@ const Profile = () => {
     };
 
     const handlePassword = () => {
-        navigate("/auth/set-password");
+        navigate("/change-password");
     };
 
     const handleProduct = () => {
-        navigate("/admin/products");
+        navigate("/admin/manage");
     };
 
 
@@ -69,9 +70,8 @@ const Profile = () => {
         })
 
 
-
     return (
-        <div style={{display:"flex"}}>
+        <div style={{display: "flex"}}>
             <nav style={{flex: 3}}></nav>
             <div style={{flex: 3}}>
                 <Dropdown

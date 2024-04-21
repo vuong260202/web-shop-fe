@@ -1,9 +1,7 @@
-
-
 const handleResponse = (response) => {
     const data = response.response;
-
-    switch (data.status) {
+    console.log(data);
+    switch (data?.status) {
         case 400:
             console.log("status 400")
             return data.data;
@@ -15,6 +13,12 @@ const handleResponse = (response) => {
     }
 }
 
+const handleResponseSuccess = (response) => {
+    console.log(response);
+    return response.data.data ?? response.data;
+}
+
 export default {
     handleResponse,
+    handleResponseSuccess,
 }
