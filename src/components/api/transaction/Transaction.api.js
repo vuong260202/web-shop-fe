@@ -23,8 +23,9 @@ const filters = async (body) => {
         headers: {
             Authorization: `Bearer ${AuthService.getToken()}`,
         },
-    }).catch(response => APIService.handleResponse(response))
-        .then(response => response.data.data)
+    }).then(response => APIService.handleResponseSuccess(response))
+        .catch(response => APIService.handleResponse(response))
+
 
     return res;
 };

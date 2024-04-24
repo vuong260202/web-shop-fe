@@ -6,6 +6,7 @@ import "../../../style/UpdateProductDetail.css";
 import Header from "../../../components/header/Header";
 import FetchData from "../../../components/api/Fetch.api";
 import config from "../../../config"
+import AuthService from "../../../service/AuthService";
 
 const UpdateProductDetail = () => {
     const {id} = useParams();
@@ -16,6 +17,10 @@ const UpdateProductDetail = () => {
     const [price, setPrice] = useState();
 
     useEffect(() => {
+        if (!AuthService.isLoggedIn) {
+            navigate('/PageNotFound');
+        }
+
         const fetchProduct = async () => {
             try {
                 FetchData.productAPI.detail(id).then((res) => {

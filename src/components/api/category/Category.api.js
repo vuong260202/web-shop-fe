@@ -21,8 +21,22 @@ const update = () => {
 
 }
 
+const detail = async ({categoryId}) => {
+    const res = await axios.get(
+        CONFIG.server.url + `/category/${categoryId}/detail`,
+        {
+            headers: {
+                Authorization: `Bearer ${AuthService.getToken()}`,
+            },
+        }).then(response => APIService.handleResponseSuccess(response))
+        .catch(response => APIService.handleResponse(response))
+
+    return res;
+}
+
 
 export default {
     all,
     update,
+    detail,
 }

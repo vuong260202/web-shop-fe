@@ -41,8 +41,13 @@ let DataType = {
                     // },
                 ]
             }
-        }
-    }
+        },
+        avatar: {}
+    },
+    user: {
+        avatar: {}
+    },
+    isOnline: {}
 }
 
 export default DataType;

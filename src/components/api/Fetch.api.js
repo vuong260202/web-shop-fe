@@ -6,6 +6,7 @@ import bannerAPI from "./banner/Banner.api";
 import admin from "./admin/admin.api";
 import rateAPI from "./rate/rate.api";
 import feedbackAPI from "./feedback/feedback.api";
+import chatAPI from "./chat/chat.api";
 
 export default {
     admin,
@@ -16,4 +17,5 @@ export default {
     bannerAPI,
     rateAPI,
     feedbackAPI,
+    chatAPI,
 };

@@ -4,8 +4,11 @@ import Header from "../../../components/header/Header";
 import FetchData from "../../../components/api/Fetch.api";
 import product from "../../../components/defined/Product";
 import {get} from "axios";
+import AuthService from "../../../service/AuthService";
+import {useNavigate} from "react-router-dom";
 
 const App = () => {
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [changeData, setChangeData] = useState([]);
     const [displayData, setDisplayData] = useState([]);
@@ -82,6 +85,10 @@ const App = () => {
     }
 
     useEffect(() => {
+        if (!AuthService.isLoggedIn) {
+            navigate('/PageNotFound');
+        }
+
         getData();
     }, [])
 

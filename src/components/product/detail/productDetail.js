@@ -105,8 +105,8 @@ const Detail = ({product}) => {
                         style={{width: "500px", height: "auto"}}
                     />
                 </div>
-                <div className={"product-info"}>
-                    <div className={"product-information"}>
+                <div style={{flex: 4, backgroundColor: "#f1dede", display: "flex", flexDirection: "column"}}>
+                    <div className={"product-information"} style={{flexGrow: 8}}>
                         <h3>{product.productName}</h3>
                         <div style={{display: "flex", marginBottom: "10px"}}>
                             <div style={{flex: 2}}>
@@ -114,6 +114,14 @@ const Detail = ({product}) => {
                             </div>
                             <div style={{flex: 6}}>
                                 <Rate disabled defaultValue={product.productStatistic.totalRate}/>
+                            </div>
+                        </div>
+                        <div style={{display: "flex", marginBottom: "10px"}}>
+                            <div style={{flex: 2}}>
+                                Hãng:
+                            </div>
+                            <div style={{flex: 6}}>
+                                {product.category}
                             </div>
                         </div>
                         <div style={{display: "flex", marginBottom: "10px"}}>
@@ -141,24 +149,24 @@ const Detail = ({product}) => {
                             </div>
                         </div>
                         <div style={{display: "flex", marginBottom: "10px", alignItems: "center"}}>
-                                <div style={{flex: 2}}>
-                                    Kích thước:
-                                </div>
-                                <div style={{flex: 6, display: "flex"}}>
-                                    <Select
-                                        defaultValue="choose"
-                                        style={{
-                                            width: "300px",
-                                        }}
-                                        onChange={(value) => setSize(value)}
-                                        options={product.sizes.map(size => {
-                                            return {
-                                                label: size,
-                                                value: size
-                                            }
-                                        })}
-                                    />
-                                </div>
+                            <div style={{flex: 2}}>
+                                Kích thước:
+                            </div>
+                            <div style={{flex: 6, display: "flex"}}>
+                                <Select
+                                    defaultValue="choose"
+                                    style={{
+                                        width: "300px",
+                                    }}
+                                    onChange={(value) => setSize(value)}
+                                    options={product.sizes.map(size => {
+                                        return {
+                                            label: size,
+                                            value: size
+                                        }
+                                    })}
+                                />
+                            </div>
                         </div>
                         <div style={{display: "flex", marginBottom: "10px"}}>
                             <div style={{flex: 2}}>
@@ -178,10 +186,10 @@ const Detail = ({product}) => {
                             </div>
                         </div>
                     </div>
-                    <div className={"product-button-detail"}>
+                    <div style={{flexGrow: 2, alignItems: "center", textAlign: "center"}}>
                         <Button style={{backgroundColor: "#458fc5"}} onClick={handleTransaction}>Mua</Button>
-                        <Button style={{backgroundColor: "#458fc5"}} onClick={handleShoppingCart}>Thêm vào giỏ
-                            hàng</Button>
+                        {/*<Button style={{backgroundColor: "#458fc5"}} onClick={handleShoppingCart}>Thêm vào giỏ*/}
+                        {/*    hàng</Button>*/}
                     </div>
                 </div>
             </div>}

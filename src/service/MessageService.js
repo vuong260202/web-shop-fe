@@ -27,6 +27,7 @@ const Context = React.createContext({
     sendMailFailure: "Gmail không đúng hoặc không có tài khoản nào dùng gmail này",
     tokenResetPasswordFailure: "Token này đã hết hạn",
     updateProductSuccess: "Cập nhật sản phẩm thành công",
+    updateProfileSuccess: "Cập nhật thông tin người dùng thành công",
 
 });
 
@@ -67,6 +68,8 @@ const contextType = {
             <Context.Consumer>{({sendMailSuccess}) => `${sendMailSuccess}!`}</Context.Consumer>,
         updateProduct:
             <Context.Consumer>{({updateProductSuccess}) => `${updateProductSuccess}!`}</Context.Consumer>,
+        updateProfile:
+            <Context.Consumer>{({updateProfileSuccess}) => `${updateProfileSuccess}!`}</Context.Consumer>,
     },
 
     fail: {

@@ -7,6 +7,7 @@ import transaction from "../../components/defined/Transaction";
 import TableTransaction from "../../components/transaction/Table.transaction";
 import message from "../../service/MessageService";
 import {QuestionCircleOutlined} from '@ant-design/icons';
+import AuthService from "../../service/AuthService";
 
 const Transaction = () => {
     const [data, setData] = useState([]);
@@ -136,13 +137,24 @@ const Transaction = () => {
     ];
 
     useEffect(() => {
-        FetchData.transactionAPI.filters().then((res) => {
-            res.map((transaction) => {
-                transaction.key = transaction.id;
-                transaction.productName = <a href={`/${transaction.product.id}/detail`}>{transaction.productName}</a>;
-            })
-            setData(res);
-        });
+        if (!AuthService.isLoggedIn) {
+            navigate('/PageNotFound');
+        }
+
+        if (AuthService.isLoggedIn) {
+            FetchData.transactionAPI.filters().then((res) => {
+                if (res?.status === 401) {
+                    navigate('/PageNotFound');
+                } else {
+                    res?.map((transaction) => {
+                        transaction.key = transaction.id;
+                        transaction.productName = <a href={`/${transaction.product.id}/detail`}>{transaction.productName}</a>;
+                    })
+                    setData(res);
+                }
+
+            });
+        }
     }, []);
 
     return (

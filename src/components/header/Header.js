@@ -6,21 +6,27 @@ import {SearchOutlined} from '@ant-design/icons';
 import AuthService from "../../service/AuthService";
 import Profile from "./Profile";
 import Auththen from "./Auththen";
+import {useNavigate} from "react-router-dom";
 
-const {Search} = Input;
 
 const Header = ({onSearch}) => {
+    const navigate = useNavigate();
     const [value, setValue] = useState("");
 
     const handleSearchPress = (event) => {
         console.log(event.key)
         if (event.key === "Enter")
-            onSearch(value);
+            onSearch ? onSearch(value) : handleSearch();
     };
 
-    const handleClickSearch = (event) => {
-        console.log(value)
-        onSearch(value);
+    const handleSearch = () => {
+        if (value) {
+            navigate(`/search?${new URLSearchParams({searchQuery: value})}`);
+        }
+    };
+
+    const handleClickSearch = () => {
+        onSearch ? onSearch(value) : handleSearch();
     };
 
     useEffect(() => {

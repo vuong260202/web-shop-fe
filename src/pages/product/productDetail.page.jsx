@@ -43,12 +43,35 @@ const ProductDetail = () => {
             {product && <Detail
                 product={product}/>}
             <div style={{height: '50px', marginLeft: '50px'}}>
-                Hãng
+
             </div>
-            {product && <ProductRate
-                productDetail={product}
-                onMessage={openNotification}
-                />}
+            {product &&
+                <div style={{display: "flex"}}>
+                    <div style={{marginRight: '40px'}}>
+                        <ProductRate
+                            productDetail={product}
+                            onMessage={openNotification}
+                        />
+                    </div>
+                    <div>
+                        <div>
+                            {product.productBrands.map(
+                                productBrand => {
+                                    return (
+                                        <div style={{marginBottom: '20px'}}>
+                                            <a href={`/${productBrand.id}/detail`}>
+                                                <img
+                                                    src={productBrand.path}
+                                                    alt="product"
+                                                    style={{width: "200px", height: "200px"}}
+                                                />
+                                            </a>
+                                        </div>
+                                    )
+                                })}
+                        </div>
+                    </div>
+                </div>}
         </div>
     )
 };

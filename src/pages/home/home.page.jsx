@@ -10,13 +10,6 @@ import SellingProducts from "../../components/home/SellingProducts";
 const Home = () => {
     const [newProducts, setNewProducts] = useState(null);
     const [sellingProducts, setSellingProducts] = useState(null);
-    const navigate = useNavigate()
-
-    const handleSearch = (searchQuery) => {
-        if (searchQuery) {
-            navigate(`/search?${new URLSearchParams({searchQuery: searchQuery})}`);
-        }
-    };
 
     useEffect(() => {
         FetchData.productAPI.filters({type: "new"}).then((res => {
@@ -32,7 +25,7 @@ const Home = () => {
 
     return (
         <div style={{backgroundColor: 'rgba(89,87,87,0.8)'}}>
-            <Header onSearch={handleSearch}/>
+            <Header/>
             <CarouselHome/>
             <div style={{backgroundColor: 'rgba(245,242,242,0.8)'}}>
                 <h2 style={{padding: "16px 10px"}}>Sản phẩm mới</h2>

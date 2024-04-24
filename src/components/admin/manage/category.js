@@ -43,7 +43,7 @@ const Category = () => {
                         />
                     </div>),
                 update: (<div>
-                    <a href={`http://localhost:3001/admin/${category.id}/update`}>sửa</a> | <a onClick={() => handleDelete(category.id)}>xóa</a>
+                    <a href={`http://localhost:3001/admin/${category.id}/category-update`}>sửa</a> | <a onClick={() => handleDelete(category.id)}>xóa</a>
                 </div>)
             })
         ));

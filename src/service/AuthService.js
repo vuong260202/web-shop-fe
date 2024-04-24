@@ -1,3 +1,5 @@
+import dataType from "../utils/dataType";
+
 let isLoggedIn = () => {
     return localStorage.getItem("token") && localStorage.getItem("token") !== 'undefined';
 };
@@ -12,6 +14,7 @@ let getToken = () => {
 let deleteTokenAndRole = () => {
     localStorage.removeItem('role');
     localStorage.removeItem('token');
+    delete dataType.isOnline[`${localStorage.getItem('username')}`];
 };
 
 let isAdmin = () => {
@@ -23,6 +26,8 @@ let isUser = () => {
 
 let setInfoAccount = (data) => {
     localStorage.setItem('token', data.token);
+    dataType.isOnline[`${data.username}`] = true;
+    localStorage.setItem('username', data.username);
     if (data.role === 'admin') {
         localStorage.setItem('role', 'admin');
     }

@@ -92,11 +92,52 @@ const updatePassword = async (body) => {
     return response;
 };
 
+const getUser = async () => {
+    const user = await axios.get(CONFIG.server.url + serverAPI.url.getUser,
+        {
+            headers: {
+                Authorization: `Bearer ${AuthService.getToken()}`,
+            },
+        }).then(response => APIService.handleResponseSuccess(response))
+           .catch(response => APIService.handleResponse(response));
+
+    return user;
+}
+
+const updateProfile = async (body) => {
+    const user = await axios.post(CONFIG.server.url + '/auth/update-profile', body,
+        {
+            headers: {
+                Authorization: `Bearer ${AuthService.getToken()}`,
+            },
+        }).then(response => APIService.handleResponseSuccess(response))
+        .catch(response => APIService.handleResponse(response));
+
+    return user;
+}
+
+const updateAvatar = async (body) => {
+    const user = await axios.post(CONFIG.server.url + '/auth/update-avatar', body,
+        {
+            headers: {
+                'Content-Type': `multipart/form-data`,
+                Authorization: `Bearer ${AuthService.getToken()}`,
+            },
+        }).then(response => APIService.handleResponseSuccess(response))
+        .catch(response => APIService.handleResponse(response));
+
+    return user;
+}
+
+
 export default {
     getRole,
     login,
     logout,
     signup,
+    updateProfile,
+    updateAvatar,
+    getUser,
     resetPassword,
     updatePassword,
     sendRequestToMail,

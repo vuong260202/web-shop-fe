@@ -23,7 +23,7 @@ const Uploaded = () => {
             <Header/>
             <div style={{display: "flex"}}>
                 <nav style={{flex: 1}}/>
-                <div style={{flex: 4, backgroundColor: "#8f6f6f"}}>
+                <div style={{flex: 4, backgroundColor: "#7f8d91"}}>
                     <Tabs
                         defaultActiveKey="1"
                         items={DataType.admin.tab.upload.items}

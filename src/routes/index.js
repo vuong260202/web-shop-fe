@@ -14,6 +14,9 @@ import SignupPage from "../pages/auth/signup.page";
 import ForgotPasswordPage from "../pages/auth/forgotPassword.page";
 import AdminManages from "../pages/admin/product/manages.page";
 import ChangeProductPage from "../pages/admin/update/changeProduct.page";
+import ChangeCategoryPage from "../pages/admin/update/changeCategoryPage";
+import ProfilePage from "../pages/auth/profile.page";
+import ChatPage from "../pages/chat/chat.page";
 
 export const routes = [
     {
@@ -79,5 +82,17 @@ export const routes = [
     {
         path: '/admin/:productId/update',
         page: ChangeProductPage,
-    }
+    },
+    {
+        path: '/admin/:categoryId/category-update',
+        page: ChangeCategoryPage,
+    },
+    {
+        path: '/auth/profile',
+        page: ProfilePage
+    },
+    {
+        path: '/chat',
+        page: ChatPage
+    },
 ]

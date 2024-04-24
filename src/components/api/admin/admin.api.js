@@ -31,6 +31,20 @@ const categoryAPI = {
             .catch(response => APIService.handleResponse(response))
 
         return res;
+    },
+    update: async (body) => {
+        const res = await axios.post(
+            CONFIG.server.url + ServerAPI.url.updateCategory,
+            body,
+            {
+                headers: {
+                    Authorization: `Bearer ${AuthService.getToken()}`,
+                },
+            }
+        ).then(response => APIService.handleResponseSuccess(response))
+            .catch(response => APIService.handleResponse(response))
+
+        return res;
     }
 }
 

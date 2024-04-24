@@ -7,7 +7,7 @@ const Product = ({data}) => {
 
     return (
         <div>
-            <div style={{display: "flex",}}>
+            <div style={{display: "flex", backgroundColor: "rgba(245, 242, 242, 0.8)"}}>
                 {data && (
                     <ul style={{
                         display: "flex",
@@ -21,7 +21,6 @@ const Product = ({data}) => {
                     </ul>
                 )}
             </div>
-
         </div>
     );
 };

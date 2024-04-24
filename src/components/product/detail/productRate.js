@@ -46,17 +46,19 @@ const ProductRate = ({productDetail, onMessage}) => {
                 <h3>Đánh giá sản phẩm</h3>
                 <div>
 
-                    <div style={{height: '50px'}}>
-                        <Popconfirm
+                    <div style={{height: '50px', display: "flex"}}>
+                        <div style={{marginRight: '5px'}}>
+                            Đánh giá:
+                        </div>
+                        {AuthService.isLoggedIn() ? <Popconfirm
                             title="Xác nhận"
                             description={`Bạn có chắc chăn đánh giá ${rate} sao cho sản phẩm này?`}
                             icon={<QuestionCircleOutlined style={{color: 'blue'}}/>}
                             onConfirm={handleRateConfirm}
                         >
-                            Đánh giá: {AuthService.isLoggedIn() ?
                             <Rate defaultValue={rate} onChange={(value) => handleRate(value)}/>
-                            : <Rate disabled defaultValue={rate}/>}
                         </Popconfirm>
+                            : <Rate disabled defaultValue={rate}/>}
 
                     </div>
                 </div>
@@ -64,6 +66,7 @@ const ProductRate = ({productDetail, onMessage}) => {
                     <div style={{flex: 3}}>
                         <Input.TextArea rows={2} style={{marginBottom: '40px', width: '600px'}}
                                         value={newComment}
+                                        disabled={!AuthService.isLoggedIn()}
                                         onChange={(event) => setNewComment(event.target.value)}
                                         autoSize={false}/>
                     </div>
