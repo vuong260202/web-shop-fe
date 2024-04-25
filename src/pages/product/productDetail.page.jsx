@@ -7,6 +7,8 @@ import "../../style/ProductDetail.css"
 import message from "../../service/MessageService";
 import Detail from "../../components/product/detail/productDetail";
 import ProductRate from "../../components/product/detail/productRate";
+import FooterComponent from "../../components/footer/FooterComponent";
+import Header from "../../components/header/Header";
 
 const ProductDetail = () => {
     const {id} = useParams();
@@ -39,6 +41,7 @@ const ProductDetail = () => {
 
     return (
         <div>
+            <Header />
             {contextHolder}
             {product && <Detail
                 product={product}/>}
@@ -72,6 +75,8 @@ const ProductDetail = () => {
                         </div>
                     </div>
                 </div>}
+
+            <FooterComponent />
         </div>
     )
 };

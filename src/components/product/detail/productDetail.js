@@ -95,7 +95,6 @@ const Detail = ({product}) => {
 
     return (
         <div>
-            <Header/>
             {contextHolder}
             {product && <div style={{display: "flex", padding: "30px 30px"}}>
                 <div style={{flex: 2.8, backgroundColor: "#eacbcb", width: "300px"}}>

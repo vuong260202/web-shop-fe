@@ -7,6 +7,7 @@ import Sider from "antd/es/layout/Sider";
 import FetchApi from "../../components/api/Fetch.api";
 import {UploadOutlined, UserOutlined} from "@ant-design/icons";
 import MessageService from "../../service/MessageService";
+import FooterComponent from "../../components/footer/FooterComponent";
 
 const ProfilePage = () => {
     const navigate = useNavigate();
@@ -151,6 +152,7 @@ const ProfilePage = () => {
                     </Layout.Content>
                 </Layout>}
             </div>
+            <FooterComponent />
         </div>
     );
 }

@@ -6,6 +6,7 @@ import Header from '../../components/header/Header'
 import FetchData from '../../components/api/Fetch.api';
 import Product from "../../components/filter/Product";
 import NewProducts from "../../components/home/NewProducts";
+import FooterComponent from "../../components/footer/FooterComponent";
 
 const Filter = () => {
     const [products, setProducts] = useState([]);
@@ -95,6 +96,7 @@ const Filter = () => {
                     </div>
                 </div>
             }
+            <FooterComponent />
         </div>
     );
 };

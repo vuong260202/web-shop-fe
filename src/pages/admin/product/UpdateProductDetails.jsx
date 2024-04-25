@@ -7,6 +7,7 @@ import Header from "../../../components/header/Header";
 import FetchData from "../../../components/api/Fetch.api";
 import config from "../../../config"
 import AuthService from "../../../service/AuthService";
+import FooterComponent from "../../../components/footer/FooterComponent";
 
 const UpdateProductDetail = () => {
     const {id} = useParams();
@@ -116,6 +117,8 @@ const UpdateProductDetail = () => {
                     </div>
                 </div>
             </div>
+
+            <FooterComponent />
         </div>
     );
 };

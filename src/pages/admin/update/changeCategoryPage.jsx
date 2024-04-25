@@ -5,6 +5,7 @@ import Header from "../../../components/header/Header";
 import {Button, Input, notification, Rate, Select} from "antd";
 import MessageService from "../../../service/MessageService";
 import AuthService from "../../../service/AuthService";
+import FooterComponent from "../../../components/footer/FooterComponent";
 
 
 const ChangeCategoryPage = () => {
@@ -93,6 +94,8 @@ const ChangeCategoryPage = () => {
             </div>
             <nav style={{flex: 1}}/>
         </div>}
+
+        <FooterComponent />
     </div>)
 }
 

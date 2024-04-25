@@ -6,6 +6,7 @@ import product from "../../../components/defined/Product";
 import {get} from "axios";
 import AuthService from "../../../service/AuthService";
 import {useNavigate} from "react-router-dom";
+import FooterComponent from "../../../components/footer/FooterComponent";
 
 const App = () => {
     const navigate = useNavigate();
@@ -129,6 +130,8 @@ const App = () => {
                 </div>
                 <Table columns={product.adminProductColumns} dataSource={isChecked ? displayData : changeData}/>
             </div>
+
+            <FooterComponent />
         </div>
     );
 };

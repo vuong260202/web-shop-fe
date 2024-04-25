@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {Tabs} from 'antd';
 import AuthService from "../../service/AuthService";
 import DataType from "../../utils/dataType";
+import FooterComponent from "../../components/footer/FooterComponent";
 
 const Uploaded = () => {
     const navigate = useNavigate();
@@ -37,6 +38,7 @@ const Uploaded = () => {
                 </div>
                 <nav style={{flex: 1}}/>
             </div>
+            <FooterComponent />
         </div>
     )
 };

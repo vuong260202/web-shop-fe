@@ -4,6 +4,7 @@ import FetchApi from "../../../components/api/Fetch.api";
 import Header from "../../../components/header/Header";
 import {Button, Input, notification, Rate, Select} from "antd";
 import MessageService from "../../../service/MessageService";
+import FooterComponent from "../../../components/footer/FooterComponent";
 
 
 const ChangeProductPage = () => {
@@ -183,6 +184,8 @@ const ChangeProductPage = () => {
                 </div>
             </div>
         </div>}
+
+        <FooterComponent />
     </div>)
 }
 

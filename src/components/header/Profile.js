@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import authService from "../../service/AuthService";
 import AuthService from "../../service/AuthService";
-import {UserOutlined, WechatOutlined} from '@ant-design/icons';
+import {UserOutlined} from '@ant-design/icons';
 import FetchApi from "../api/Fetch.api";
 
 const Profile = () => {
@@ -90,7 +90,6 @@ const Profile = () => {
                 AuthService.deleteTokenAndRole();
                 return;
             }
-
             setUser(res);
         })
     }, []);
@@ -100,30 +99,31 @@ const Profile = () => {
         <div style={{display: "flex"}}>
             <nav style={{flex: 1}}></nav>
             <div style={{flex: 3, display: "flex"}}>
-                <div style={{flex: 1}}>
-                    {user && <WechatOutlined
-                        onClick={() => navigate(`/chat?${new URLSearchParams({userId: user.id})}`)}
-                        style={{
-                            fontSize: "35px",
-                        }}/>}
-                </div>
-                <div style={{flex: 1}}>
-                    <Dropdown
-                        menu={{
-                            items,
-                        }}
-                        style={{flex: 3}}
-                    >
-                        {AuthService.isLoggedIn && user?.avatar ? <Avatar src={user.avatar}/> : <UserOutlined
-                            onClick={(e) => e.preventDefault()}
-                            style={{
-                                fontSize: "35px",
+                <nav style={{flex: 1}}/>
+                <div style={{flex: 1, display: "flex", alignItems: "center"}}>
+                    <div style={{flex: 1, textAlign: "right"}}>
+                        {user?.fullname}
+                    </div>
+                    <div style={{flex: 1, textAlign: "left", marginLeft: "5px"}}>
+                        <Dropdown
+                            menu={{
+                                items,
                             }}
-                        />}
-                    </Dropdown>
+                            style={{flex: 3}}
+                        >
+                            {AuthService.isLoggedIn && user?.avatar ? <Avatar src={user.avatar} style={{
+                                fontSize: "35px"
+                            }}/> : <UserOutlined
+                                onClick={(e) => e.preventDefault()}
+                                style={{
+                                    fontSize: "35px",
+                                }}
+                            />}
+                        </Dropdown>
+                    </div>
+                    <nav style={{flex: 2}}/>
                 </div>
             </div>
-
         </div>
     )
 }

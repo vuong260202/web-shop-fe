@@ -6,6 +6,8 @@ import FetchData from '../../components/api/Fetch.api';
 import CarouselHome from "../../components/home/CarouselHome";
 import NewProducts from "../../components/home/NewProducts";
 import SellingProducts from "../../components/home/SellingProducts";
+import {Footer} from "antd/es/modal/shared";
+import FooterComponent from "../../components/footer/FooterComponent";
 
 const Home = () => {
     const [newProducts, setNewProducts] = useState(null);
@@ -13,13 +15,13 @@ const Home = () => {
 
     useEffect(() => {
         FetchData.productAPI.filters({type: "new"}).then((res => {
-            console.log(res.products);
-            setNewProducts(res.products);
+            console.log(res?.products);
+            setNewProducts(res?.products);
         }))
 
         FetchData.productAPI.filters({type: "hot"}).then((res => {
-            console.log(res.products);
-            setSellingProducts(res.products);
+            console.log(res?.products);
+            setSellingProducts(res?.products);
         }))
     }, []);
 
@@ -39,6 +41,7 @@ const Home = () => {
                     <SellingProducts data={sellingProducts}/>
                 </div>
             </div>
+            <FooterComponent />
         </div>
     );
 };

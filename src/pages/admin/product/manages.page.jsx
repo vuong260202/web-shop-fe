@@ -4,6 +4,7 @@ import React, {useEffect} from "react";
 import dataType from "../../../utils/dataType";
 import AuthService from "../../../service/AuthService";
 import {useNavigate} from "react-router-dom";
+import FooterComponent from "../../../components/footer/FooterComponent";
 
 const AdminManages = () => {
     const navigate = useNavigate();
@@ -33,6 +34,8 @@ const AdminManages = () => {
                         }}
                     />
             </div>
+
+            <FooterComponent />
         </div>
     )
 }

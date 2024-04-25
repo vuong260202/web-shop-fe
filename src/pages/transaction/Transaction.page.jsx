@@ -8,6 +8,7 @@ import TableTransaction from "../../components/transaction/Table.transaction";
 import message from "../../service/MessageService";
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import AuthService from "../../service/AuthService";
+import FooterComponent from "../../components/footer/FooterComponent";
 
 const Transaction = () => {
     const [data, setData] = useState([]);
@@ -182,6 +183,7 @@ const Transaction = () => {
                 </div>
             </div>
             <Tabs defaultActiveKey="1" items={items} onChange={onChange}/>
+            <FooterComponent />
             {contextHolder}
         </div>
     );
