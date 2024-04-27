@@ -1,8 +1,11 @@
 import dataType from "../utils/dataType";
+import FetchApi from "../components/api/Fetch.api";
+import webService from "./webService";
 
 let isLoggedIn = () => {
-    return localStorage.getItem("token") && localStorage.getItem("token") !== 'undefined';
+    return localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null;
 };
+
 let getRole = () => {
     return localStorage.getItem('role') ?? 'user';
 };
@@ -14,7 +17,7 @@ let getToken = () => {
 let deleteTokenAndRole = () => {
     localStorage.removeItem('role');
     localStorage.removeItem('token');
-    delete dataType.isOnline[`${localStorage.getItem('username')}`];
+    localStorage.removeItem('googleId');
 };
 
 let isAdmin = () => {
@@ -26,10 +29,12 @@ let isUser = () => {
 
 let setInfoAccount = (data) => {
     localStorage.setItem('token', data.token);
-    dataType.isOnline[`${data.username}`] = true;
-    localStorage.setItem('username', data.username);
     if (data.role === 'admin') {
         localStorage.setItem('role', 'admin');
+    }
+
+    if (data.googleId) {
+        localStorage.setItem('googleId', data.googleId);
     }
 };
 

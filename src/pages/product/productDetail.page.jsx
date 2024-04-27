@@ -10,7 +10,7 @@ import ProductRate from "../../components/product/detail/productRate";
 import FooterComponent from "../../components/footer/FooterComponent";
 import Header from "../../components/header/Header";
 
-const ProductDetail = () => {
+const ProductDetail = ({isLoggedIn}) => {
     const {id} = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);
@@ -41,7 +41,7 @@ const ProductDetail = () => {
 
     return (
         <div>
-            <Header />
+            <Header isLoggedIn={isLoggedIn}/>
             {contextHolder}
             {product && <Detail
                 product={product}/>}

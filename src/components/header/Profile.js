@@ -61,6 +61,12 @@ const Profile = () => {
                     label: <a onClick={handleTransaction}> Giao dịch </a>,
                     key: "3",
                 },
+                {
+                    label: <a onClick={() => {
+                        navigate("/admin/statistic")
+                    }}> Thống kê </a>,
+                    key: "4",
+                }
             ]
             : [
                 {
@@ -77,10 +83,10 @@ const Profile = () => {
     items.push(
         {
             label: <a onClick={handlePassword}> Đổi mật khẩu </a>,
-            key: "4",
+            key: "8",
         }, {
             label: <a onClick={handleLogout}> Thoát </a>,
-            key: "5",
+            key: "9",
         })
 
     useEffect(() => {
@@ -99,9 +105,9 @@ const Profile = () => {
         <div style={{display: "flex"}}>
             <nav style={{flex: 1}}></nav>
             <div style={{flex: 3, display: "flex"}}>
-                <nav style={{flex: 1}}/>
+                <nav style={{flex: 0.3}}/>
                 <div style={{flex: 1, display: "flex", alignItems: "center"}}>
-                    <div style={{flex: 1, textAlign: "right"}}>
+                    <div style={{flex: 3, textAlign: "right"}}>
                         {user?.fullname}
                     </div>
                     <div style={{flex: 1, textAlign: "left", marginLeft: "5px"}}>

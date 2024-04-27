@@ -15,6 +15,7 @@ import AdminManages from "../pages/admin/product/manages.page";
 import ChangeProductPage from "../pages/admin/update/changeProduct.page";
 import ChangeCategoryPage from "../pages/admin/update/changeCategoryPage";
 import ProfilePage from "../pages/auth/profile.page";
+import StatisticPage from "../pages/admin/statistic/statitic.page";
 
 export const routes = [
     {
@@ -89,4 +90,8 @@ export const routes = [
         path: '/auth/profile',
         page: ProfilePage
     },
+    {
+        path: '/admin/statistic',
+        page: StatisticPage
+    }
 ]

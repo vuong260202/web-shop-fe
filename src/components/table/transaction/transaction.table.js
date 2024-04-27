@@ -1,8 +1,8 @@
 import {Table} from "antd";
 import React, {useState} from "react";
-import transaction from "../defined/Transaction";
+import tableColumn from "../../defined/tableColumn";
 
-const TableTransaction = ({data, handleRowKeys}) => {
+const TransactionTable = ({data, handleRowKeys}) => {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     const onSelectChange = (newSelectedRowKeys) => {
@@ -16,9 +16,9 @@ const TableTransaction = ({data, handleRowKeys}) => {
     };
 
     return (
-        <Table rowSelection={rowSelection} columns={transaction.columns} dataSource={data}
+        <Table rowSelection={rowSelection} columns={tableColumn.column.transaction} dataSource={data}
                style={{alignItems: "center"}}/>
     )
 }
 
-export default TableTransaction;
+export default TransactionTable;

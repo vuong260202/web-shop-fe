@@ -4,11 +4,13 @@ import Header from "../../components/header/Header";
 import FetchData from "../../components/api/Fetch.api";
 import {useNavigate} from "react-router-dom";
 import transaction from "../../components/defined/Transaction";
-import TableTransaction from "../../components/transaction/Table.transaction";
+import TransactionTable from "../../components/table/transaction/transaction.table";
 import message from "../../service/MessageService";
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import AuthService from "../../service/AuthService";
 import FooterComponent from "../../components/footer/FooterComponent";
+import FetchApi from "../../components/api/Fetch.api";
+import webService from "../../service/webService";
 
 const Transaction = () => {
     const [data, setData] = useState([]);
@@ -58,19 +60,19 @@ const Transaction = () => {
         switch (key) {
             case '1':
                 handleData(transaction.STATUS.ALL);
-                items[key - 1].children = <TableTransaction data={data}/>
+                items[key - 1].children = <TransactionTable data={data}/>
                 break;
             case '2':
                 handleData(transaction.STATUS.PENDING);
-                items[key - 1].children = <TableTransaction data={data}/>
+                items[key - 1].children = <TransactionTable data={data}/>
                 break;
             case '3':
                 handleData(transaction.STATUS.IN_PROGRESS);
-                items[key - 1].children = <TableTransaction data={data}/>
+                items[key - 1].children = <TransactionTable data={data}/>
                 break;
             case '4':
                 handleData(transaction.STATUS.DONE);
-                items[key - 1].children = <TableTransaction data={data}/>
+                items[key - 1].children = <TransactionTable data={data}/>
                 break;
             default:
         }
@@ -118,28 +120,28 @@ const Transaction = () => {
         {
             key: '1',
             label: 'Tất cả',
-            children: <TableTransaction data={data} handleRowKeys={handleRowKeys}/>,
+            children: <TransactionTable data={data} handleRowKeys={handleRowKeys}/>,
         },
         {
             key: '2',
             label: 'Đang chờ',
-            children: <TableTransaction data={data} handleRowKeys={handleRowKeys}/>,
+            children: <TransactionTable data={data} handleRowKeys={handleRowKeys}/>,
         },
         {
             key: '3',
             label: 'Đang xử lý',
-            children: <TableTransaction data={data} handleRowKeys={handleRowKeys}/>,
+            children: <TransactionTable data={data} handleRowKeys={handleRowKeys}/>,
         },
         {
             key: '4',
             label: 'Đã hoàn thành',
-            children: <TableTransaction data={data} handleRowKeys={handleRowKeys}/>,
+            children: <TransactionTable data={data} handleRowKeys={handleRowKeys}/>,
         },
     ];
 
     useEffect(() => {
         if (!AuthService.isLoggedIn) {
-            navigate('/PageNotFound');
+            navigate('/');
         }
 
         if (AuthService.isLoggedIn) {
@@ -161,29 +163,35 @@ const Transaction = () => {
     return (
         <div>
             <Header onSearch={handleSearch}/>
-            <div style={{height: "50px", display: "flex"}}>
-                <nav style={{flex: 2}} />
-                <div style={{flex: 1, alignItems: "screenLeft", display: "flex"}}>
-                    <Popconfirm
-                        title="Xác nhận"
-                        description="Cho phép giao dịch thực hiện?"
-                        icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
-                        onConfirm={handleAccept}
-                    >
-                        <Button danger disabled={isDisable}>Xác thực</Button>
-                    </Popconfirm>
-                    <Popconfirm
-                        title="Xác nhận"
-                        description="Bạn có chắc muốn xóa?"
-                        icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
-                        onConfirm={handleDelete}
-                    >
-                        <Button danger disabled={isDisable}>Delete</Button>
-                    </Popconfirm>
+            <div style={{display: "flex", flexDirection: "column", height: "600px"}}>
+                <div style={{flexGrow: 0.7, display: "flex"}}>
+                    <nav style={{flex: 2}}/>
+                    <div style={{flex: 1, alignItems: "screenLeft", display: "flex"}}>
+                        <Popconfirm
+                            title="Xác nhận"
+                            description="Cho phép giao dịch thực hiện?"
+                            icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
+                            onConfirm={handleAccept}
+                        >
+                            <Button danger disabled={isDisable}>Xác thực</Button>
+                        </Popconfirm>
+                        <Popconfirm
+                            title="Xác nhận"
+                            description="Bạn có chắc muốn xóa?"
+                            icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
+                            onConfirm={handleDelete}
+                        >
+                            <Button danger disabled={isDisable}>Delete</Button>
+                        </Popconfirm>
+                    </div>
+                </div>
+                <div style={{flexGrow: 4}}>
+                    <Tabs defaultActiveKey="1" items={items} onChange={onChange}/>
+                </div>
+                <div>
+                    <FooterComponent/>
                 </div>
             </div>
-            <Tabs defaultActiveKey="1" items={items} onChange={onChange}/>
-            <FooterComponent />
             {contextHolder}
         </div>
     );

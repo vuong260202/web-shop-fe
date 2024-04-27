@@ -34,9 +34,25 @@ const detail = async ({categoryId}) => {
     return res;
 }
 
+const filterStatistic = async (conditions) => {
+    const response = await axios.post(
+        "http://localhost:3000/category/filter-statistic",
+        conditions,
+        {
+            headers: {
+                Authorization: `Bearer ${AuthService.getToken()}`,
+            },
+        }
+    )
+        .then(response => response.data.data)
+        .catch(res => APIService.handleResponse(res));
+
+    return response;
+};
 
 export default {
     all,
     update,
     detail,
+    filterStatistic,
 }

@@ -8,6 +8,9 @@ const getAvatar = (url) => {
     return (<Avatar src={url}/>)
 }
 
+let isLoggedIn = false;
+
 export default {
-    getAvatar
+    getAvatar,
+    isLoggedIn
 };

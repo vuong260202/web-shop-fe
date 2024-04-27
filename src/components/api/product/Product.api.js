@@ -50,8 +50,25 @@ const filters = async (conditions) => {
     return response;
 };
 
+const filterStatistic = async (conditions) => {
+    const response = await axios.post(
+        "http://localhost:3000/product/filter-statistic",
+        conditions,
+        {
+            headers: {
+                Authorization: `Bearer ${AuthService.getToken()}`,
+            },
+        }
+    )
+        .then(response => response.data.data)
+        .catch(res => APIService.handleResponse(res));
+
+    return response;
+};
+
 export default {
     update,
     detail,
     filters,
+    filterStatistic,
 }

@@ -33,6 +33,17 @@ const login = async (conditions) => {
     }
 };
 
+const loginWithGoogle = async (data) => {
+    console.log(data);
+    const response = await axios.post(
+        "http://localhost:3000/auth/login-with-google",
+        data
+    ).then(response => APIService.handleResponseSuccess(response))
+        .catch(response => APIService.handleResponse(response))
+
+    return response;
+};
+
 const signup = async (attributes) => {
     try {
         const res = await axios.post("http://localhost:3000/auth/signup", attributes);
@@ -141,4 +152,5 @@ export default {
     resetPassword,
     updatePassword,
     sendRequestToMail,
+    loginWithGoogle
 }

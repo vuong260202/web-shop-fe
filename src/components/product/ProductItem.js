@@ -25,7 +25,6 @@ const ProductItem = ({product}) => {
                 <div>
                 </div>
                 <div style={{height: '150px'}}>
-                    {console.log(product)}
                     <div style={{height: '40px'}}>
                         <a>{product.productName}</a>
                     </div>

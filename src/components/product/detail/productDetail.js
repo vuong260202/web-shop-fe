@@ -35,7 +35,7 @@ const Detail = ({product}) => {
     }
 
     const handleTransaction = ({isAccept}) => {
-        if (!AuthService.isLoggedIn() && isAccept) {
+        if (isAccept) {
             if (name.trim() === '') {
                 openNotification(message.contextType.fieldEmpty.name);
                 return false;
@@ -57,7 +57,7 @@ const Detail = ({product}) => {
             return false;
         }
 
-        if (AuthService.isLoggedIn() || isAccept) {
+        if (isAccept) {
 
             let productId = product.id;
             let conditions = {
@@ -194,7 +194,10 @@ const Detail = ({product}) => {
             </div>}
             <>
                 <Drawer title={"Thông tin cá nhân"} onClose={onClose} open={showForm}>
-                    <Form>
+                    <Form
+                        labelCol={{span: 8,}}
+                        wrapperCol={{span: 16,}}
+                    >
                         <Form.Item label="Họ&Tên">
                             <Input
                                 type="text"

@@ -9,7 +9,7 @@ import config from "../../../config"
 import AuthService from "../../../service/AuthService";
 import FooterComponent from "../../../components/footer/FooterComponent";
 
-const UpdateProductDetail = () => {
+const UpdateProductDetail = ({isLoggedIn}) => {
     const {id} = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState(null);

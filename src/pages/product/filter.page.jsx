@@ -59,9 +59,8 @@ const Filter = () => {
 
     return (
         <div>
-            <Header onSearch={handleSearch}/>
+            <Header onSearch={handleSearch} />
             <div>
-
                 {optionsCategory && <div style={{alignItems: "center", display: "flex", margin: "20px"}}>
                     <div>
                         Hãng:
