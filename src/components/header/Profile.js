@@ -13,8 +13,8 @@ const Profile = () => {
     const handleLogout = () => {
         authService.deleteTokenAndRole();
         FetchApi.authAPI.logout();
-        window.location.reload();
         navigate("/");
+
     };
 
     const handleUpload = () => {

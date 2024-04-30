@@ -2,7 +2,7 @@ import React from "react";
 
 const FooterComponent = () => {
     return (
-        <footer style={{alignItems: "center", textAlign: "center", color: "black", backgroundColor: '#807d7d', bottom: 0}}>
+        <footer style={{alignItems: "center", textAlign: "center", color: "black", backgroundColor: '#807d7d', height: '100%'}}>
             <div style={{marginTop: '5px'}}>
                 Địa chỉ liên hệ: 123 Nguyễn Văn Trỗi, Hà Nội
             </div>

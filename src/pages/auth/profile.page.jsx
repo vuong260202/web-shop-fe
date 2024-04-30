@@ -45,7 +45,7 @@ const ProfilePage = () => {
     };
 
     useEffect(() => {
-        if (!AuthService.isLoggedIn) {
+        if (!AuthService.isLoggedIn()) {
             navigate('/PageNotFound');
         }
 

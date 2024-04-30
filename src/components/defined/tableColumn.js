@@ -95,6 +95,68 @@ const statisticCategoryColumns = [
     },
 ];
 
+const csvHeaderProduct = [
+    {
+        label: "STT",
+        key: "index",
+    },
+    {
+        label: "Tên sản phẩm",
+        key: "productName",
+    },
+    {
+        label: "Tên hãng",
+        key: "categoryName",
+    },
+    {
+        label: "Số giao dịch đã thực hiện",
+        key: "transactionCount",
+    },
+    {
+        label: "Số lượng sản phẩm đã bán",
+        key: "totalCount",
+    },
+    {
+        label: "Đánh giá trung bình",
+        key: "totalRate",
+    },
+    {
+        label: "Số đánh giá",
+        key: "rateCount",
+    },
+    {
+        label: "Tổng số tiền thu được",
+        key: "totalAmount",
+    },
+];
+
+const csvHeaderCategory = [
+    {
+        label: "STT",
+        key: "index",
+    },
+    {
+        label: "Tên hãng",
+        key: "categoryName",
+    },
+    {
+        label: "Số sản phẩm",
+        key: "productCount",
+    },
+    {
+        label: "Số lượng sản phẩm đã bán",
+        key: "productPayment",
+    },
+    {
+        label: "Số giao dịch đã thực hiện",
+        key: "transactionCount",
+    },
+    {
+        label: "Tổng số tiền thu được",
+        key: "totalAmount",
+    },
+];
+
 export default {
     column: {
         transaction: transactionColumns,
@@ -102,5 +164,11 @@ export default {
             product: statisticProductColumns,
             category: statisticCategoryColumns,
         },
+    },
+    csv: {
+        header: {
+            product: csvHeaderProduct,
+            category: csvHeaderCategory,
+        }
     }
 }

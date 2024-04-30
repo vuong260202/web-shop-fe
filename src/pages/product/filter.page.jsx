@@ -60,42 +60,51 @@ const Filter = () => {
     return (
         <div>
             <Header onSearch={handleSearch} />
-            <div>
-                {optionsCategory && <div style={{alignItems: "center", display: "flex", margin: "20px"}}>
+            <div style={{display: 'flex', flexDirection: "column", height: "500px"}}>
+                <div style={{flexGrow: 15}}>
                     <div>
-                        Hãng:
+                        {optionsCategory && <div style={{alignItems: "center", display: "flex", margin: "20px"}}>
+                            <div>
+                                Hãng:
+                            </div>
+                            <div style={{marginLeft: "20px"}}>
+                                <Checkbox checked={checkCategory.length === optionsCategory.length} onChange={() => {
+                                    if (checkCategory.length === optionsCategory.length) {
+                                        setCheckCategory([]);
+                                    } else {
+                                        setCheckCategory(optionsCategory.map(category => category.categoryName));
+                                    }
+                                }}>
+                                    Check all
+                                </Checkbox>
+                            </div>
+                            <div style={{marginLeft: "20px"}}>
+                                <Checkbox.Group options={optionsCategory.map(category => category.categoryName)}
+                                                value={checkCategory} onChange={(list) => {
+                                    setCheckCategory(list);
+                                }}/>
+                            </div>
+                        </div>}
                     </div>
-                    <div style={{marginLeft: "20px"}}>
-                        <Checkbox checked={checkCategory.length === optionsCategory.length} onChange={() => {
-                            if (checkCategory.length === optionsCategory.length) {
-                                setCheckCategory([]);
-                            } else {
-                                setCheckCategory(optionsCategory.map(category => category.categoryName));
-                            }
-                        }}>
-                            Check all
-                        </Checkbox>
-                    </div>
-                    <div style={{marginLeft: "20px"}}>
-                        <Checkbox.Group options={optionsCategory.map(category => category.categoryName)} value={checkCategory} onChange={(list) => {
-                                setCheckCategory(list);
-                        }}/>
-                    </div>
-                </div>}
-            </div>
-            <Divider/>
-            {!products.length ? <Empty/> :
-                <div>
-                    <div style={{margin: '0px 0px', alignItems: "center", textAlign: "center"}}>
-                        <Product data={products}/>
-                    </div>
-                    <div className="pageination">
-                        <Pagination current={page} defaultCurrent={1} total={total}
-                                    onChange={(newPage) => setPage(newPage)}/>
+                    <Divider/>
+                    <div>
+                        {!products.length ? <Empty/> :
+                            <div>
+                                <div style={{margin: '0px 0px', alignItems: "center", textAlign: "center"}}>
+                                    <Product data={products}/>
+                                </div>
+                                <div className="pageination">
+                                    <Pagination current={page} defaultCurrent={1} total={total}
+                                                onChange={(newPage) => setPage(newPage)}/>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
-            }
-            <FooterComponent />
+                <div style={{flexGrow: 0.2}}>
+                        <FooterComponent />
+                </div>
+            </div>
         </div>
     );
 };

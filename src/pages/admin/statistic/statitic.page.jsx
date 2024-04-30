@@ -9,11 +9,8 @@ import StatisticTable from "../../../components/table/statistic/statistic.table"
 
 
 const StatisticPage = () => {
-    const [data, setData] = useState([]);
     const navigate = useNavigate();
     const [keyTabs, setKeyTabs] = useState('1');
-    const [selectData, setSelectData] = useState(null);
-    const [isDisable, setIsDisable] = useState(true);
     const [api, contextHolder] = notification.useNotification();
 
     const openNotification = (type) => {
