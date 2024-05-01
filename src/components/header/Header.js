@@ -1,7 +1,7 @@
-import {Button, Col, Input, Row} from "antd";
+import {Button, Col, Divider, Input, Popover, Row} from "antd";
 import React, {useEffect, useState} from "react";
 import "../../style/Header.css";
-import {SearchOutlined} from '@ant-design/icons';
+import {SearchOutlined, SendOutlined, WechatOutlined, SmileOutlined} from '@ant-design/icons';
 
 import AuthService from "../../service/AuthService";
 import Profile from "./Profile";
@@ -12,6 +12,7 @@ import {useNavigate} from "react-router-dom";
 const Header = ({onSearch}) => {
     const navigate = useNavigate();
     const [value, setValue] = useState("");
+    const [openChat, setOpenChat] = useState(false);
 
     const handleSearchPress = (event) => {
         console.log(event.key)
@@ -64,6 +65,50 @@ const Header = ({onSearch}) => {
                     {AuthService.isLoggedIn() ? <Profile/> : <Auththen/>}
                 </Col>
             </Row>
+            <div style={{
+                position: "fixed",
+                zIndex: 999,
+                bottom: '0px',
+                right: '20px',
+            }}>
+                {/*{!openChat ? <WechatOutlined style={{fontSize: '30px'}} onClick={() => setOpenChat(true)}/> :*/}
+                {/*<div style={{height: "400px", width: "300px", backgroundColor: "white", display: "flex", flexDirection: "column"}}>*/}
+                {/*        <div style={{flexGrow: 0.5, display: "flex", flexDirection: "column"}}>*/}
+                {/*            <div style={{textAlign: "right", flexGrow: 3}}>*/}
+                {/*                <Button icon={'-'} onClick={() => setOpenChat(false)}/>*/}
+                {/*            </div>*/}
+                {/*            <div style={{flexGrow: 2}}>*/}
+                {/*                <Divider style={{marginTop: '0px', marginBottom: '5px'}}/>*/}
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*        <div style={{flexGrow: 15, backgroundColor: 'blue'}}>*/}
+                {/*            chat content*/}
+                {/*        </div>*/}
+                {/*        <div style={{flexGrow: 1, bottom: '10px', width: "100%", display: "flex", flexDirection: "column"}}>*/}
+                {/*            <div style={{flexGrow: 0.1}}>*/}
+                {/*                <Divider style={{marginBottom: '0px', marginTop: '5px'}}/>*/}
+                {/*            </div>*/}
+                {/*            <div style={{ flexGrow: 1.5, alignItems: "center", display: "flex", flexDirection: "column"}}>*/}
+                {/*                <div style={{flex: 7, width: '100%', border: "none"}}>*/}
+                {/*                    <Input*/}
+                {/*                        placeholder="Nhập tin nhắn"*/}
+                {/*                    />*/}
+                {/*                </div>*/}
+                {/*                <div style={{width: '100%', display: "flex"}}>*/}
+                {/*                    <div style={{flex: 1, textAlign: "left"}}>*/}
+                {/*                        <Popover>*/}
+                {/*                            <SmileOutlined onClick={() => {}}/>*/}
+                {/*                        </Popover>*/}
+                {/*                    </div>*/}
+                {/*                    <div style={{flex: 1, textAlign: "right"}}>*/}
+                {/*                        <SendOutlined/>*/}
+                {/*                    </div>*/}
+                {/*                </div>*/}
+
+                {/*            </div>*/}
+                {/*        </div>*/}
+                {/*    </div>}*/}
+            </div>
         </div>
 
     )

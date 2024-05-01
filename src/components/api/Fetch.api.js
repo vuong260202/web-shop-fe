@@ -7,6 +7,7 @@ import admin from "./admin/admin.api";
 import rateAPI from "./rate/rate.api";
 import feedbackAPI from "./feedback/feedback.api";
 import chatAPI from "./chat/chat.api";
+import noticeAPI from "./notice/notice.api";
 
 export default {
     admin,
@@ -18,4 +19,5 @@ export default {
     rateAPI,
     feedbackAPI,
     chatAPI,
+    noticeAPI,
 };

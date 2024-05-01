@@ -1,5 +1,5 @@
 const handleResponse = (response) => {
-    console.log(response)
+    // console.log(response)
     const data = response.response;
     console.log(data);
     switch (data?.status) {

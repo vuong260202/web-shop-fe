@@ -167,22 +167,26 @@ const Transaction = () => {
                 <div style={{flexGrow: 0.7, display: "flex"}}>
                     <nav style={{flex: 2}}/>
                     <div style={{flex: 1, alignItems: "screenLeft", display: "flex"}}>
-                        <Popconfirm
-                            title="Xác nhận"
-                            description="Cho phép giao dịch thực hiện?"
-                            icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
-                            onConfirm={handleAccept}
-                        >
-                            <Button danger disabled={isDisable}>Xác thực</Button>
-                        </Popconfirm>
-                        <Popconfirm
-                            title="Xác nhận"
-                            description="Bạn có chắc muốn xóa?"
-                            icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
-                            onConfirm={handleDelete}
-                        >
-                            <Button danger disabled={isDisable}>Delete</Button>
-                        </Popconfirm>
+                        <div style={{flex: 1}}>
+                            {AuthService.isAdmin() && <Popconfirm
+                                title="Xác nhận"
+                                description="Cho phép giao dịch thực hiện?"
+                                icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
+                                onConfirm={handleAccept}
+                            >
+                                <Button danger disabled={isDisable}>Xác thực</Button>
+                            </Popconfirm>}
+                        </div>
+                        <div style={{flex: 1}}>
+                            <Popconfirm
+                                title="Xác nhận"
+                                description="Bạn có chắc muốn xóa?"
+                                icon={<QuestionCircleOutlined style={{color: 'red'}}/>}
+                                onConfirm={handleDelete}
+                            >
+                                <Button danger disabled={isDisable}>Xóa</Button>
+                            </Popconfirm>
+                        </div>
                     </div>
                 </div>
                 <div style={{flexGrow: 4}}>

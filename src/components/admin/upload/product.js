@@ -3,11 +3,13 @@ import React, {useEffect, useState} from "react";
 import FetchApi from "../../api/Fetch.api";
 import UploadProduct from "../../form/UploadProduct.form";
 import message from "../../../service/MessageService";
+import {useNavigate} from "react-router-dom";
 
 const Product = () => {
     const [data, setData] = useState(null);
     const [api, contextHolder] = notification.useNotification();
     const [imageUrl, setImageUrl] = useState(undefined);
+    const navigate = useNavigate();
 
     const handleFileChange = (event) => {
         try {
@@ -22,8 +24,8 @@ const Product = () => {
             setImageUrl(undefined);
             // console.log(e);
         }
-
     };
+
     const openNotification = (type) => {
         api.info({
             message: "Message",
@@ -40,6 +42,7 @@ const Product = () => {
                 openNotification(message.contextType.doesNotExist.product);
             } else if (res.status === 200) {
                 openNotification(message.contextType.success.upload);
+                setTimeout(() => navigate("/") , 3000)
                 console.log("upload success");
             } else {
                 console.log("Server error");

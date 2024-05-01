@@ -1,10 +1,11 @@
-import {Avatar, Dropdown} from "antd";
+import {Avatar, Badge, Dropdown, Menu, Popover} from "antd";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import authService from "../../service/AuthService";
 import AuthService from "../../service/AuthService";
 import {UserOutlined} from '@ant-design/icons';
 import FetchApi from "../api/Fetch.api";
+import NoticeComponent from "../notice/notice";
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -107,6 +108,9 @@ const Profile = () => {
             <div style={{flex: 3, display: "flex"}}>
                 <nav style={{flex: 0.3}}/>
                 <div style={{flex: 1, display: "flex", alignItems: "center"}}>
+                    <div style={{flex: 1}}>
+                            <NoticeComponent />
+                    </div>
                     <div style={{flex: 3, textAlign: "right"}}>
                         {user?.fullname}
                     </div>

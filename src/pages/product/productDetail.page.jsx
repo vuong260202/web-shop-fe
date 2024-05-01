@@ -40,7 +40,7 @@ const ProductDetail = ({isLoggedIn}) => {
     }, [id]);
 
     return (
-        <div>
+        <div style={{display: "flex", flexDirection: "column"}}>
             <Header isLoggedIn={isLoggedIn}/>
             {contextHolder}
             {product && <Detail
@@ -75,8 +75,7 @@ const ProductDetail = ({isLoggedIn}) => {
                         </div>
                     </div>
                 </div>}
-
-            <FooterComponent />
+                <FooterComponent/>
         </div>
     )
 };

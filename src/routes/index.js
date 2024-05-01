@@ -1,7 +1,6 @@
 import NotFoundPage from "../pages/notFound/NotFoundPage";
 import SetPassword from "../pages/auth/changePassword.page";
-import Upload from "../pages/admin/Upload.page";
-import UpdateProductDetail from "../pages/admin/product/UpdateProductDetails";
+import Upload from "../pages/admin/upload/Upload.page";
 import ProductSearch from "../components/product/ProductSearch";
 import ProductDetail from "../pages/product/productDetail.page";
 import Home from "../pages/home/home.page";
@@ -11,7 +10,7 @@ import LoginPage from "../pages/auth/login.page";
 import AdminLogin from "../components/admin/auth/Login";
 import SignupPage from "../pages/auth/signup.page";
 import ForgotPasswordPage from "../pages/auth/forgotPassword.page";
-import AdminManages from "../pages/admin/product/manages.page";
+import AdminManages from "../pages/admin/manager/manages.page";
 import ChangeProductPage from "../pages/admin/update/changeProduct.page";
 import ChangeCategoryPage from "../pages/admin/update/changeCategoryPage";
 import ProfilePage from "../pages/auth/profile.page";
@@ -35,7 +34,7 @@ export const routes = [
         page: LoginPage,
     },
     {
-        path: '/admin/login',
+        path: '/admin/sign-in',
         page: AdminLogin,
     },
     {
@@ -57,10 +56,6 @@ export const routes = [
     {
         path: '/admin/transaction',
         page: Transaction,
-    },
-    {
-        path: '/admin/:id/edit',
-        page: UpdateProductDetail,
     },
     {
         path: '/product/search',
@@ -93,5 +88,5 @@ export const routes = [
     {
         path: '/admin/statistic',
         page: StatisticPage
-    }
+    },
 ]
