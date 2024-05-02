@@ -5,7 +5,7 @@ import FetchApi from "../../api/Fetch.api";
 import {SearchOutlined} from "@ant-design/icons";
 import {CSVLink} from "react-csv";
 
-const StatisticTable = ({parentType}) => {
+const StatisticTable = ({parentType, query}) => {
     const [data, setData] = useState([]);
     const [dataExport, setDataExport] = useState([]);
     const [now, setNow] = useState(new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" })));
@@ -58,8 +58,9 @@ const StatisticTable = ({parentType}) => {
             month: month.value,
             year: year.value,
             parentType: parentType,
+            query: query
         });
-    }, [parentType]);
+    }, [parentType, query]);
 
     const handleSearch = (condition) => {
         console.log(parentType);
@@ -147,6 +148,7 @@ const StatisticTable = ({parentType}) => {
                         month: month.value,
                         year: year.value,
                         parentType: parentType,
+                        query: query ?? '',
                     })}/>
                 </div>
                 <nav style={{flex: 1}}/>

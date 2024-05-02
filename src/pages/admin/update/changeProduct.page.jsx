@@ -42,7 +42,7 @@ const ChangeProductPage = () => {
             });
             setTotal(response.total);
         })
-        FetchApi.categoryAPI.all().then(res => {
+        FetchApi.categoryAPI.filter().then(res => {
             setCategoryOptions(res.map(category => {
                 return {
                     value: category.id,

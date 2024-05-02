@@ -12,6 +12,7 @@ const StatisticPage = () => {
     const navigate = useNavigate();
     const [keyTabs, setKeyTabs] = useState('1');
     const [api, contextHolder] = notification.useNotification();
+    const [query, setQuery] = useState('')
 
     const openNotification = (type) => {
         api.info({
@@ -22,6 +23,7 @@ const StatisticPage = () => {
     };
 
     const handleSearch = (search) => {
+        setQuery(search)
     }
 
     const onChange = (key) => {
@@ -34,12 +36,12 @@ const StatisticPage = () => {
         {
             key: '1',
             label: 'Sản phẩm',
-            children: <StatisticTable parentType={keyTabs}/>,
+            children: <StatisticTable parentType={keyTabs} query={query}/>,
         },
         {
             key: '2',
             label: 'Hãng',
-            children: <StatisticTable parentType={keyTabs}/>,
+            children: <StatisticTable parentType={keyTabs} query={query}/>,
         },
     ];
 

@@ -32,11 +32,8 @@ const ProductRate = ({productDetail, onMessage}) => {
             content: newComment,
             productId: product.id,
         }).then((res) => {
-            FetchData.productAPI.detail(product.id)
-                .then((res) => {
-                    setNewComment('');
-                    setProduct(res)
-                })
+            console.log(res);
+            window.location.reload();
         })
     }
 

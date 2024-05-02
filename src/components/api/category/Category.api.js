@@ -4,9 +4,10 @@ import APIService from "../../../service/APIService";
 import ServerAPI from "../../../utils/serverAPI";
 import CONFIG from "../../../config"
 
-const all = async () => {
-    const res = await axios.get(
-        CONFIG.server.url + "/category/all",
+const filter = async (body) => {
+    const res = await axios.post(
+        CONFIG.server.url + "/category/filter",
+        body,
         {
             headers: {
                 Authorization: `Bearer ${AuthService.getToken()}`,
@@ -51,7 +52,7 @@ const filterStatistic = async (conditions) => {
 };
 
 export default {
-    all,
+    filter,
     update,
     detail,
     filterStatistic,

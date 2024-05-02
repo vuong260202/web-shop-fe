@@ -15,6 +15,7 @@ import webService from "../../service/webService";
 const Transaction = () => {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
+    const [filterStatus, setFilterStatus] = useState(transaction.STATUS.ALL);
     const [keyTabs, setKeyTabs] = useState(0);
     const [selectData, setSelectData] = useState(null);
     const [isDisable, setIsDisable] = useState(true);
@@ -29,10 +30,23 @@ const Transaction = () => {
     };
 
     const handleSearch = (search) => {
+        console.log(search);
+        FetchApi.transactionAPI.filters({
+            query: search,
+            status: filterStatus,
+        }).then(res => {
+            res.map((transaction) => {
+                transaction.key = transaction.id;
+                transaction.productName = <a href={`/${transaction.id}/detail`}>{transaction.productName}</a>;
+            })
+            console.log(res)
+            setData(res);
+        })
     }
 
     const getData = (status) => {
         console.log(status)
+        setFilterStatus(status);
         FetchData.transactionAPI.filters({
             status: status,
         }).then((res) => {

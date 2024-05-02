@@ -28,6 +28,7 @@ const Context = React.createContext({
     tokenResetPasswordFailure: "Token này đã hết hạn",
     updateProductSuccess: "Cập nhật sản phẩm thành công",
     updateProfileSuccess: "Cập nhật thông tin người dùng thành công",
+    deleteSuccess: "Xóa sản phẩm thành công",
 
 });
 
@@ -70,6 +71,8 @@ const contextType = {
             <Context.Consumer>{({updateProductSuccess}) => `${updateProductSuccess}!`}</Context.Consumer>,
         updateProfile:
             <Context.Consumer>{({updateProfileSuccess}) => `${updateProfileSuccess}!`}</Context.Consumer>,
+        delete:
+            <Context.Consumer>{({deleteSuccess}) => `${deleteSuccess}!`}</Context.Consumer>,
     },
 
     fail: {

@@ -25,6 +25,7 @@ const ProductDetail = ({isLoggedIn}) => {
     };
 
     useEffect(() => {
+        console.log(id);
         FetchData.productAPI.detail(id)
             .then((res) => {
                 console.log(res);
@@ -33,9 +34,7 @@ const ProductDetail = ({isLoggedIn}) => {
                     return;
                 }
 
-                console.log(">>>" + res);
                 setProduct(res);
-                // setUserRate(res)
             })
     }, [id]);
 
@@ -45,9 +44,7 @@ const ProductDetail = ({isLoggedIn}) => {
             {contextHolder}
             {product && <Detail
                 product={product}/>}
-            <div style={{height: '50px', marginLeft: '50px'}}>
-
-            </div>
+            <nav style={{height: '50px', marginLeft: '50px'}} />
             {product &&
                 <div style={{display: "flex"}}>
                     <div style={{marginRight: '40px'}}>

@@ -107,7 +107,7 @@ const Detail = ({product}) => {
                 <div style={{flex: 4, backgroundColor: "#f1dede", display: "flex", flexDirection: "column"}}>
                     <div className={"product-information"} style={{flexGrow: 8}}>
                         <h3>{product.productName}</h3>
-                        <div style={{display: "flex", marginBottom: "10px"}}>
+                        <div style={{display: "flex", marginBottom: "8px"}}>
                             <div style={{flex: 2}}>
                                 Đánh giá chung:
                             </div>
@@ -115,7 +115,7 @@ const Detail = ({product}) => {
                                 <Rate disabled defaultValue={product.productStatistic.totalRate}/>
                             </div>
                         </div>
-                        <div style={{display: "flex", marginBottom: "10px"}}>
+                        <div style={{display: "flex", marginBottom: "8px"}}>
                             <div style={{flex: 2}}>
                                 Hãng:
                             </div>
@@ -123,7 +123,7 @@ const Detail = ({product}) => {
                                 {product.category}
                             </div>
                         </div>
-                        <div style={{display: "flex", marginBottom: "10px"}}>
+                        <div style={{display: "flex", marginBottom: "8px"}}>
                             <div style={{flex: 2}}>
                                 Mô tả:
                             </div>
@@ -131,7 +131,7 @@ const Detail = ({product}) => {
                                 {product.description}
                             </div>
                         </div>
-                        <div style={{display: "flex", marginBottom: "10px"}}>
+                        <div style={{display: "flex", marginBottom: "8px"}}>
                             <div style={{flex: 2}}>
                                 Số lượng đã bán:
                             </div>
@@ -139,7 +139,7 @@ const Detail = ({product}) => {
                                 {product.productStatistic.totalCount}
                             </div>
                         </div>
-                        <div style={{display: "flex", marginBottom: "10px"}}>
+                        <div style={{display: "flex", marginBottom: "8px"}}>
                             <div style={{flex: 2}}>
                                 Giá bán:
                             </div>
@@ -147,7 +147,7 @@ const Detail = ({product}) => {
                                 {product.price}
                             </div>
                         </div>
-                        <div style={{display: "flex", marginBottom: "10px", alignItems: "center"}}>
+                        <div style={{display: "flex", marginBottom: "8px", alignItems: "center"}}>
                             <div style={{flex: 2}}>
                                 Kích thước:
                             </div>
@@ -167,7 +167,7 @@ const Detail = ({product}) => {
                                 />
                             </div>
                         </div>
-                        <div style={{display: "flex", marginBottom: "10px"}}>
+                        <div style={{display: "flex", marginBottom: "8px"}}>
                             <div style={{flex: 2}}>
                                 Số lượng:
                             </div>
@@ -176,7 +176,7 @@ const Detail = ({product}) => {
                                 {` ${count}`} <UpSquareOutlined onClick={handleIncNumber}/>
                             </div>
                         </div>
-                        <div style={{display: "flex", marginBottom: "10px"}}>
+                        <div style={{display: "flex", marginBottom: "8px"}}>
                             <div style={{flex: 2}}>
                                 Tổng tiền:
                             </div>
@@ -187,8 +187,6 @@ const Detail = ({product}) => {
                     </div>
                     <div style={{flexGrow: 2, alignItems: "center", textAlign: "center"}}>
                         <Button style={{backgroundColor: "#458fc5"}} onClick={handleTransaction}>Mua</Button>
-                        {/*<Button style={{backgroundColor: "#458fc5"}} onClick={handleShoppingCart}>Thêm vào giỏ*/}
-                        {/*    hàng</Button>*/}
                     </div>
                 </div>
             </div>}

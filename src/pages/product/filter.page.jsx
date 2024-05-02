@@ -50,7 +50,7 @@ const Filter = () => {
     useEffect(() => {
         console.log(query)
         handleSearch()
-        FetchData.categoryAPI.all().then((res) => {
+        FetchData.categoryAPI.filter().then((res) => {
             console.log(">>>", res);
             setOptionsCategory(res);
             setCheckCategory(res.map(category => category.categoryName));

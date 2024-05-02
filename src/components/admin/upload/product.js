@@ -53,7 +53,7 @@ const Product = () => {
 
     useEffect(() => {
         setImageUrl(undefined);
-        FetchApi.categoryAPI.all().then(res => {
+        FetchApi.categoryAPI.filter().then(res => {
             setData(res?.map(category => {
                 return {
                     value: category.id,
