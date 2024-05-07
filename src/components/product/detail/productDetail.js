@@ -109,20 +109,8 @@ const Detail = ({product}) => {
                         <img
                             src={"http://localhost:3001" + product.path}
                             alt={`Product ${product.id}`}
-                            style={{width: "100%", height: "80%"}}
+                            style={{width: "100%", height: "100%"}}
                         />
-                    </div>
-                    <div style={{flexGrow: 2, }}>
-                        <div style={{margin: '5px'}}
-                            onClick={() => {
-                                console.log(">>>")
-                            }}>
-                            <img
-                                src={"http://localhost:3001" + product.path}
-                                alt={`Product ${product.id}`}
-                                style={{height: '50px'}}
-                            />
-                        </div>
                     </div>
                 </div>
                 <div style={{flex: 4, backgroundColor: "#f1dede", display: "flex", flexDirection: "column"}}>
