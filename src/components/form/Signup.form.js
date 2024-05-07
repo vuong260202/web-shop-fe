@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import FetchData from "../api/Fetch.api";
 import message from "../../service/MessageService";
+import MessageService from "../../service/MessageService";
 
 const SignupForm = () => {
     const navigate = useNavigate()
@@ -30,18 +31,6 @@ const SignupForm = () => {
             case password:
                 openNotification(message.contextType.fieldEmpty.password);
                 return;
-            case email:
-                openNotification(message.contextType.fieldEmpty.email);
-                return;
-            case numberPhone:
-                openNotification(message.contextType.fieldEmpty.numberPhone);
-                return;
-            case address:
-                openNotification(message.contextType.fieldEmpty.address);
-                return;
-            case fullname:
-                openNotification(message.contextType.fieldEmpty.name);
-                return;
         }
 
         try {
@@ -54,10 +43,20 @@ const SignupForm = () => {
                 fullname,
             }).then((res) => {
                 if (res.status === 200) {
-                    console.log('SignupPage successful');
                     navigate('/auth/login')
                 } else {
-                    console.log('SignupPage failed');
+                    console.log(res.data);
+                    if (!res) {
+                        console.log("error internal server");
+                    }
+
+                    if (res?.data.message === "Cannot create account") {
+                        openNotification(MessageService.contextType.valid.email);
+                    }
+
+                    if (res?.data.message === "Account already exists") {
+                        openNotification(MessageService.contextType.doesNotExist.account);
+                    }
                 }
             })
         } catch (error) {
@@ -83,7 +82,10 @@ const SignupForm = () => {
                       }}
                       layout="horizontal"
                 >
-                    <Form.Item label="Tài khoản">
+                    <Form.Item
+                        label="Tài khoản"
+                        required={true}
+                    >
                         <Input
                             type="text"
                             placeholder="Tài khoản"
@@ -91,7 +93,9 @@ const SignupForm = () => {
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </Form.Item>
-                    <Form.Item label="Mật khẩu">
+                    <Form.Item
+                        label="Mật khẩu"
+                        required={true}>
                         <Input
                             type="password"
                             placeholder="Mật khẩu"
@@ -115,7 +119,9 @@ const SignupForm = () => {
                             onChange={(e) => setAddress(e.target.value)}
                         />
                     </Form.Item>
-                    <Form.Item label="gmail">
+                    <Form.Item
+                        label="gmail"
+                    >
                         <Input
                             type="text"
                             placeholder="gmail"

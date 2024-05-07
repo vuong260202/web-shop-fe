@@ -73,7 +73,7 @@ const ProfilePage = () => {
         } else {
             console.log(address)
             FetchApi.authAPI.updateProfile({
-                fullname, numberPhone, address
+                fullname, numberPhone, address, email
             }).then(res => {
                 console.log(res);
                 setEditing(false);
@@ -127,7 +127,7 @@ const ProfilePage = () => {
                                 <Input placeholder={user.fullname} value={fullname} disabled={!editing}  onChange={(value) => setFullname(value.target.value)} />
                             </Form.Item>
                             <Form.Item label="Email">
-                                <Input placeholder={user.email} disabled={true} />
+                                <Input placeholder={user.email} value={email} disabled={!editing} onChange={(value) => setEmail(value.target.value)} />
                             </Form.Item>
                             <Form.Item label="Số điện thoại">
                                 <Input placeholder={user.numberPhone} value={numberPhone} disabled={!editing}  onChange={(value) => setNumberPhone(value.target.value)} />

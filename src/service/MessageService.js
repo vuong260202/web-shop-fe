@@ -10,6 +10,7 @@ const Context = React.createContext({
     numberPhoneEmpty: 'Số điện thoại không được để trống',
     fileEmpty: 'Chưa có ảnh',
     sizeEmpty: 'Vui lòng chọn kích thước',
+    emailEmpty: 'email không được để trống',
 
     accountNotFound: 'Tài khoản hoặc mật khẩu không đúng',
     buySuccess: 'Đặt hàng thành công',
@@ -30,6 +31,10 @@ const Context = React.createContext({
     updateProfileSuccess: "Cập nhật thông tin người dùng thành công",
     deleteSuccess: "Xóa sản phẩm thành công",
 
+    emailValid: "Email không tồn tại",
+
+    accountAlreadyExist: "Tài khoản đã tồn tại"
+
 });
 
 
@@ -42,7 +47,12 @@ const contextType = {
         numberPhone: <Context.Consumer>{({numberPhoneEmpty}) => `${numberPhoneEmpty}!`}</Context.Consumer>,
         address: <Context.Consumer>{({addressEmpty}) => `${addressEmpty}!`}</Context.Consumer>,
         file: <Context.Consumer>{({fileEmpty}) => `${fileEmpty}!`}</Context.Consumer>,
-        size: <Context.Consumer>{({sizeEmpty}) => `${sizeEmpty}!`}</Context.Consumer>
+        size: <Context.Consumer>{({sizeEmpty}) => `${sizeEmpty}!`}</Context.Consumer>,
+        email: <Context.Consumer>{({emailEmpty}) => `${emailEmpty}!`}</Context.Consumer>
+    },
+
+    valid: {
+        email: <Context.Consumer>{({emailValid}) => `${emailValid}!`}</Context.Consumer>
     },
 
     notFound: {
@@ -52,6 +62,7 @@ const contextType = {
     doesNotExist: {
         category: <Context.Consumer>{({categoryDoesNotExist}) => `${categoryDoesNotExist}!`}</Context.Consumer>,
         product: <Context.Consumer>{({productDoesNotExist}) => `${productDoesNotExist}!`}</Context.Consumer>,
+        account: <Context.Consumer>{({accountAlreadyExist}) => `${accountAlreadyExist}!`}</Context.Consumer>
     },
 
     success: {

@@ -1,5 +1,5 @@
 import Header from "../../header/Header";
-import {Button, Drawer, Form, Input, notification, Rate, Select} from "antd";
+import {Button, Drawer, Form, Input, Modal, notification, Rate, Select} from "antd";
 import {DownSquareOutlined, UpSquareOutlined} from "@ant-design/icons";
 import React, {useState} from "react";
 import AuthService from "../../../service/AuthService";
@@ -16,6 +16,7 @@ const Detail = ({product}) => {
     const [size, setSize] = useState(undefined);
     const [showForm, setShowForm] = useState(false);
     const [api, contextHolder] = notification.useNotification();
+    const [open, setOpen] = useState(false);
 
     const openNotification = (type) => {
         api.info({
@@ -58,7 +59,6 @@ const Detail = ({product}) => {
         }
 
         if (isAccept) {
-
             let productId = product.id;
             let conditions = {
                 productId,
@@ -73,7 +73,7 @@ const Detail = ({product}) => {
             FetchData.transactionAPI.add(conditions).then((res) => {
                 console.log(res);
                 if (res) {
-                    onClose();
+                    setOpen(false)
                     openNotification(message.contextType.success.buy);
                     if (AuthService.isLoggedIn()) {
                         setTimeout(() => navigate('/transaction/history'), 3000)
@@ -82,9 +82,11 @@ const Detail = ({product}) => {
                 }
             });
         } else {
-            setShowForm(true);
+            // setShowForm(true);
+            setOpen(true);
         }
     };
+
     const handleShoppingCart = (search) => {
     }
 
@@ -92,17 +94,36 @@ const Detail = ({product}) => {
         setShowForm(false);
     };
 
-
     return (
         <div>
             {contextHolder}
             {product && <div style={{display: "flex", padding: "30px 30px"}}>
-                <div style={{flex: 2.8, backgroundColor: "#eacbcb", width: "300px"}}>
-                    <img
-                        src={"http://localhost:3001" + product.path}
-                        alt={`Product ${product.id}`}
-                        style={{width: "500px", height: "auto"}}
-                    />
+                <div style={{
+                    flex: 3.2,
+                    backgroundColor: "#eacbcb",
+                    width: "300px",
+                    display: "flex",
+                    flexDirection: "column"
+                }}>
+                    <div style={{flexGrow: 3, margin: "2px"}}>
+                        <img
+                            src={"http://localhost:3001" + product.path}
+                            alt={`Product ${product.id}`}
+                            style={{width: "100%", height: "80%"}}
+                        />
+                    </div>
+                    <div style={{flexGrow: 2, }}>
+                        <div style={{margin: '5px'}}
+                            onClick={() => {
+                                console.log(">>>")
+                            }}>
+                            <img
+                                src={"http://localhost:3001" + product.path}
+                                alt={`Product ${product.id}`}
+                                style={{height: '50px'}}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div style={{flex: 4, backgroundColor: "#f1dede", display: "flex", flexDirection: "column"}}>
                     <div className={"product-information"} style={{flexGrow: 8}}>
@@ -173,7 +194,7 @@ const Detail = ({product}) => {
                             </div>
                             <div style={{flex: 6}}>
                                 <DownSquareOutlined onClick={handleDecNumber}/>
-                                {` ${count}`} <UpSquareOutlined onClick={handleIncNumber}/>
+                                {`${count}`} <UpSquareOutlined onClick={handleIncNumber}/>
                             </div>
                         </div>
                         <div style={{display: "flex", marginBottom: "8px"}}>
@@ -191,37 +212,48 @@ const Detail = ({product}) => {
                 </div>
             </div>}
             <>
-                <Drawer title={"Thông tin cá nhân"} onClose={onClose} open={showForm}>
-                    <Form
-                        labelCol={{span: 8,}}
-                        wrapperCol={{span: 16,}}
-                    >
-                        <Form.Item label="Họ&Tên">
-                            <Input
-                                type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </Form.Item>
-                        <Form.Item label="Địa chỉ">
-                            <Input
-                                type="text"
-                                value={address}
-                                onChange={(e) => setAddress(e.target.value)}
-                            />
-                        </Form.Item>
-                        <Form.Item label="Số điện thoại">
-                            <Input
-                                type="number"
-                                value={numberPhone}
-                                onChange={(e) => setNumberPhone(e.target.value)}
-                            />
-                        </Form.Item>
-                    </Form>
-                    <Button style={{backgroundColor: "#458fc5"}} onClick={() => {
+                <Modal
+                    title="Nhập thông tin cá nhân"
+                    centered
+                    open={open}
+                    onOk={() => {
                         handleTransaction({isAccept: true})
-                    }}>Xác nhận</Button>
-                </Drawer>
+                    }}
+                    onCancel={() => {setOpen(false)}}
+                    width={600}>
+                    <div style={{alignItems: "center", textAlign: "center"}}>
+                        <nav style={{height: "30px"}}/>
+                        <Form
+                            labelCol={{span: 8,}}
+                            wrapperCol={{span: 12,}}>
+                            <Form.Item
+                                label="Họ&Tên">
+                                <Input
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </Form.Item>
+                            <Form.Item
+                                label="Địa chỉ">
+                                <Input
+                                    type="text"
+                                    value={address}
+                                    onChange={(e) => setAddress(e.target.value)}
+                                />
+                            </Form.Item>
+                            <Form.Item
+                                label="Số điện thoại">
+                                <Input
+                                    type="number"
+                                    value={numberPhone}
+                                    onChange={(e) => setNumberPhone(e.target.value)}
+                                />
+                            </Form.Item>
+                        </Form>
+                        <nav style={{height: "30px"}}/>
+                    </div>
+                </Modal>
             </>
         </div>
     );

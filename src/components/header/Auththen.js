@@ -16,8 +16,8 @@ const Auththen = () => {
     return (
         <div>
             <div style={{display: "flex"}}>
-                <Button style={{flex: 1}} onClick={handleLogin}> Login </Button>
-                <Button style={{flex: 1}} onClick={handleSignUp}> SignUp </Button>
+                <Button style={{flex: 1}} onClick={handleLogin}> Đăng nhập </Button>
+                <Button style={{flex: 1}} onClick={handleSignUp}> Đăng ký </Button>
             </div>
         </div>
     )
