@@ -1,5 +1,5 @@
 import Header from "../../header/Header";
-import {Button, Drawer, Form, Input, Modal, notification, Rate, Select} from "antd";
+import {Button, Drawer, Form, Image, Input, Modal, notification, Rate, Select} from "antd";
 import {DownSquareOutlined, UpSquareOutlined} from "@ant-design/icons";
 import React, {useState} from "react";
 import AuthService from "../../../service/AuthService";
@@ -106,10 +106,9 @@ const Detail = ({product}) => {
                     flexDirection: "column"
                 }}>
                     <div style={{flexGrow: 3, margin: "2px"}}>
-                        <img
-                            src={"http://localhost:3001" + product.path}
-                            alt={`Product ${product.id}`}
-                            style={{width: "100%", height: "100%"}}
+                        <Image
+                            width={'100%'}
+                            src={`http://localhost:3001` + product.path}
                         />
                     </div>
                 </div>
@@ -121,7 +120,7 @@ const Detail = ({product}) => {
                                 Đánh giá chung:
                             </div>
                             <div style={{flex: 6}}>
-                                <Rate disabled defaultValue={product.productStatistic.totalRate}/>
+                                <Rate allowHalf disabled defaultValue={product.productStatistic.totalRate}/>
                             </div>
                         </div>
                         <div style={{display: "flex", marginBottom: "8px"}}>

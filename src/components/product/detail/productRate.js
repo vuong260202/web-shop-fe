@@ -1,9 +1,9 @@
-import {Button, Input, Popconfirm, Rate} from "antd";
+import {Button, Input, Popconfirm, Rate, Statistic} from "antd";
 import React, {useEffect, useState} from "react";
 import AuthService from "../../../service/AuthService";
 import message from "../../../service/MessageService"
 import FetchData from "../../api/Fetch.api";
-import {QuestionCircleOutlined, SendOutlined, UserOutlined} from '@ant-design/icons';
+import {QuestionCircleOutlined, SendOutlined, UserOutlined, StarOutlined, WechatOutlined} from '@ant-design/icons';
 
 const ProductRate = ({productDetail, onMessage}) => {
     const [rate, setRate] = useState(productDetail?.userRate?.rate);
@@ -41,8 +41,12 @@ const ProductRate = ({productDetail, onMessage}) => {
         <div style={{marginLeft: '50px', backgroundColor: '#b7b3b3', width: '900px'}}>
             <div style={{marginLeft: '5px'}}>
                 <h3>Đánh giá sản phẩm</h3>
+                <div style={{display: "flex", alignItems: "center", marginBottom: '5px', marginTop: '-15px'}}>
+                    <Statistic value={product?.rates} prefix={<StarOutlined/>}/>
+                    <nav style={{marginLeft: '15px'}}/>
+                    <Statistic value={product?.productStatistic.feedback.length} prefix={<WechatOutlined />} />
+                </div>
                 <div>
-
                     <div style={{height: '50px', display: "flex"}}>
                         <div style={{marginRight: '5px'}}>
                             Đánh giá:
@@ -56,7 +60,6 @@ const ProductRate = ({productDetail, onMessage}) => {
                             <Rate defaultValue={rate} onChange={(value) => handleRate(value)}/>
                         </Popconfirm>
                             : <Rate disabled defaultValue={rate}/>}
-
                     </div>
                 </div>
                 <div style={{display: "flex", width: '840px'}}>
