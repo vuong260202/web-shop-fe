@@ -1,5 +1,5 @@
 import Header from "../../../components/header/Header";
-import {Modal, notification, Popconfirm, Table, Tabs} from "antd";
+import {Modal, notification, Table, Tabs} from "antd";
 import React, {useEffect, useState} from "react";
 import AuthService from "../../../service/AuthService";
 import {useNavigate} from "react-router-dom";
@@ -7,6 +7,8 @@ import FooterComponent from "../../../components/footer/FooterComponent";
 import FetchData from "../../../components/api/Fetch.api";
 import MessageService from "../../../service/MessageService";
 import product from "../../../components/defined/Product";
+import ProductMapper from "../../../mapper/product.mapper";
+import CategoryMapper from "../../../mapper/category.mapper";
 
 
 
@@ -26,80 +28,36 @@ const AdminManages = () => {
         });
     };
 
+    const deleteClickEvent = ({productId, categoryId}) => {
+        setId(productId ?? categoryId);
+        setOpen(true);
+    }
+
     const getData = (body) => {
         if (key === '1') {
             FetchData.productAPI.filters(body).then((res) => {
                 console.log(res.products);
-                setDisplayData(res.products.map((product, index) => ({
-                        key: index + 1,
-                        id: product.id,
-                        productName: (<a href={`http://localhost:3001/${product.id}/detail`}>{product.productName}</a>),
-                        price: product.price,
-                        category: product.category.categoryName,
-                        total: product.total,
-                        path: product.path,
-                        size: 32,
-                        updatedAt: product.updatedAt,
-                        image: (
-                            <div>
-                                <img
-                                    src={'http://localhost:3001' + product.path}
-                                    style={{width: '100px', height: "auto"}}
-                                />
-                            </div>),
-                        update: (<div>
-                            <a href={`http://localhost:3001/admin/${product.id}/update`}>sửa</a> |
-                            <a onClick={() => {
-                                setId(product.id)
-                                setOpen(true);
-                            }}>xóa</a>
-
-                        </div>)
-                    })
-                ));
+                setDisplayData(ProductMapper.ProductListToProductManager({
+                    products: res.products,
+                    deleteClickEvent
+                }));
             })
-                .catch((error) => {
-                    console.error("Error fetching transaction data: ", error);
-                });
         } else {
             FetchData.categoryAPI.filter(body).then((res) => {
                 console.log(res);
-                setDisplayData(res.map((category, index) => ({
-                        key: index + 1,
-                        id: category.id,
-                        categoryName: category.categoryName,
-                        productCount: category.productCount,
-                        path: category.path,
-                        updatedAt: category.updatedAt,
-                        image: (
-                            <div>
-                                <img
-                                    src={'http://localhost:3001' + category.path}
-                                    style={{width: '100px', height: "auto"}}
-                                />
-                            </div>),
-                        update: (<div>
-                            <a href={`http://localhost:3001/admin/${category.id}/category-update`}>sửa</a> | <a onClick={() => handleDelete(category.id)}>xóa</a>
-                        </div>)
-                    })
-                ));
+                setDisplayData(CategoryMapper.CategoryListToCategoryManager({
+                    categories: res,
+                    deleteClickEvent
+                }));
             })
-                .catch((error) => {
-                    console.error("Error fetching transaction data: ", error);
-                });
         }
     }
 
     const handleDelete = (id) => {
-        if (key === '1') {
-            FetchData.admin.productAPI.delete({productId: id}).then((res) => {
-                openNotification(MessageService.contextType.success.delete)
-            })
-        } else {
-            FetchData.admin.categoryAPI.delete({categoryId: id}).then((res) => {
-                openNotification(MessageService.contextType.success.delete)
-            })
-        }
+        FetchData
+            .admin[key === '1' ? 'productAPI' : 'categoryAPI']
+            .delete(key === '1' ? {productId: id} : {categoryId: id})
+            .then(() => openNotification(MessageService.contextType.success.delete))
 
         window.location.reload();
     }
