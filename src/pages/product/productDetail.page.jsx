@@ -42,8 +42,7 @@ const ProductDetail = ({isLoggedIn}) => {
         <div style={{display: "flex", flexDirection: "column"}}>
             <Header isLoggedIn={isLoggedIn}/>
             {contextHolder}
-            {product && <Detail
-                product={product}/>}
+            {product && <Detail product={product}/>}
             <nav style={{height: '50px', marginLeft: '50px'}}/>
             {product &&
                 <div style={{display: "flex"}}>

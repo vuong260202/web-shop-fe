@@ -8,6 +8,9 @@ const url = {
     getUser: '/auth/detail',
     getChatUser: '/chat/detail',
     allUsers: '/chat/all-user',
+    product: {
+        getAllProductNames: '/product/all-product-name',
+    }
 }
 
 export default {
