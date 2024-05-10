@@ -2,7 +2,7 @@ import {Button, Input, notification, Steps} from "antd";
 import {useState} from "react";
 import {ReloadOutlined} from '@ant-design/icons';
 import FetchApi from "../api/Fetch.api";
-import MessageService from "../../service/MessageService";
+import MessageService from "../../dto/message.dto";
 import {useNavigate} from "react-router-dom";
 
 const ForgotPasswordStep = () => {

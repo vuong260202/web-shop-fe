@@ -1,6 +1,6 @@
 import {Button, Form, Input, notification} from "antd";
 import React, {useState} from "react";
-import message from "../../service/MessageService";
+import message from "../../dto/message.dto";
 
 const UploadCategoryForm = ({handleClick, handleImage}) => {
     const [file, setFile] = useState(null);

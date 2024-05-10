@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import FetchData from "../api/Fetch.api";
 import AuthService from "../../service/AuthService";
 import {useLocation, useNavigate} from "react-router-dom";
-import message from "../../service/MessageService";
+import message from "../../dto/message.dto";
 
 const LoginForm = ({role}) => {
     const navigate = useNavigate();

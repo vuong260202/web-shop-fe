@@ -2,7 +2,7 @@ import {Button, Form, Input, notification} from "antd";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import fetchApi from "../api/Fetch.api";
-import MessageService from "../../service/MessageService";
+import MessageService from "../../dto/message.dto";
 
 const UpdatePassword = () => {
     const navigate = useNavigate();

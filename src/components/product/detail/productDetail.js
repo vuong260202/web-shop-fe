@@ -2,7 +2,7 @@ import {Button, Image, notification, Rate, Select} from "antd";
 import {DownSquareOutlined, UpSquareOutlined} from "@ant-design/icons";
 import React, {useState} from "react";
 import AuthService from "../../../service/AuthService";
-import message from "../../../service/MessageService";
+import message from "../../../dto/message.dto";
 import FetchData from "../../api/Fetch.api";
 import {useNavigate} from "react-router-dom";
 import ProductCompare from "../../modal/productCompare.productDetail";

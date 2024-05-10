@@ -1,7 +1,3 @@
-import dataType from "../utils/dataType";
-import FetchApi from "../components/api/Fetch.api";
-import webService from "./webService";
-
 let isLoggedIn = () => {
     return localStorage.getItem('token') !== undefined && localStorage.getItem('token') !== null;
 };

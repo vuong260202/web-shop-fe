@@ -3,19 +3,18 @@ import {Button, notification, Popconfirm, Tabs} from "antd";
 import Header from "../../components/header/Header";
 import FetchData from "../../components/api/Fetch.api";
 import {useNavigate} from "react-router-dom";
-import transaction from "../../components/defined/Transaction";
 import TransactionTable from "../../components/table/transaction/transaction.table";
-import message from "../../service/MessageService";
+import message from "../../dto/message.dto";
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import AuthService from "../../service/AuthService";
 import FooterComponent from "../../components/footer/FooterComponent";
-import FetchApi from "../../components/api/Fetch.api";
-import webService from "../../service/webService";
+import transactionDto from "../../dto/transaction.dto";
+import transactionMapper from "../../mapper/transaction.mapper";
 
 const Transaction = () => {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
-    const [filterStatus, setFilterStatus] = useState(transaction.STATUS.ALL);
+    const [filterStatus, setFilterStatus] = useState(transactionDto.STATUS.ALL);
     const [keyTabs, setKeyTabs] = useState(0);
     const [selectData, setSelectData] = useState(null);
     const [isDisable, setIsDisable] = useState(true);
@@ -30,32 +29,26 @@ const Transaction = () => {
     };
 
     const handleSearch = (search) => {
-        console.log(search);
-        FetchApi.transactionAPI.filters({
-            query: search,
-            status: filterStatus,
-        }).then(res => {
-            res.map((transaction) => {
-                transaction.key = transaction.id;
-                transaction.productName = <a href={`/${transaction.id}/detail`}>{transaction.productName}</a>;
-            })
-            console.log(res)
-            setData(res);
-        })
+        getData(search);
     }
 
-    const getData = (status) => {
-        console.log(status)
-        setFilterStatus(status);
-        FetchData.transactionAPI.filters({
-            status: status,
-        }).then((res) => {
-            res.map((transaction) => {
-                transaction.key = transaction.id;
-                transaction.productName = <a href={`/${transaction.id}/detail`}>{transaction.productName}</a>;
-            })
+    const getData = ({status, search}) => {
+        let body = {
+            status: status ?? filterStatus
+        }
+
+        if (search) {
+            console.log("search: ", search);
+            body.query = search;
+        }
+
+        if (status) {
+            setFilterStatus(status);
+        }
+
+        FetchData.transactionAPI.filters(body).then((res) => {
+            setData(transactionMapper.filterTransactionsToDisplayTransactions(res));
             console.log(res)
-            setData(res);
         });
     }
 
@@ -63,7 +56,7 @@ const Transaction = () => {
 
     const handleData = (status) => {
         console.log(status)
-        getData(status);
+        getData({status: status});
     }
 
     const onChange = (key) => {
@@ -73,19 +66,19 @@ const Transaction = () => {
         console.log(items[0])
         switch (key) {
             case '1':
-                handleData(transaction.STATUS.ALL);
+                handleData(transactionDto.STATUS.ALL);
                 items[key - 1].children = <TransactionTable data={data}/>
                 break;
             case '2':
-                handleData(transaction.STATUS.PENDING);
+                handleData(transactionDto.STATUS.PENDING);
                 items[key - 1].children = <TransactionTable data={data}/>
                 break;
             case '3':
-                handleData(transaction.STATUS.IN_PROGRESS);
+                handleData(transactionDto.STATUS.IN_PROGRESS);
                 items[key - 1].children = <TransactionTable data={data}/>
                 break;
             case '4':
-                handleData(transaction.STATUS.DONE);
+                handleData(transactionDto.STATUS.DONE);
                 items[key - 1].children = <TransactionTable data={data}/>
                 break;
             default:
@@ -105,7 +98,7 @@ const Transaction = () => {
     const handleDelete = () => {
         let isAccept = false;
         selectData?.forEach(sdt => {
-            if (sdt.status !== transaction.STATUS.PENDING) {
+            if (sdt.status !== transactionDto.STATUS.PENDING) {
                 isAccept = true;
             }
         })
@@ -160,16 +153,11 @@ const Transaction = () => {
 
         if (AuthService.isLoggedIn) {
             FetchData.transactionAPI.filters().then((res) => {
-                if (res?.status === 401) {
-                    navigate('/PageNotFound');
-                } else {
-                    res?.map((transaction) => {
-                        transaction.key = transaction.id;
-                        transaction.productName = <a href={`/${transaction.product.id}/detail`}>{transaction.productName}</a>;
-                    })
-                    setData(res);
-                }
-
+                res?.map((transaction) => {
+                    transaction.key = transaction.id;
+                    transaction.productName = <a href={`/${transaction.product.id}/detail`}>{transaction.productName}</a>;
+                })
+                setData(res);
             });
         }
     }, []);

@@ -5,10 +5,11 @@ import AuthService from "../../../service/AuthService";
 import {useNavigate} from "react-router-dom";
 import FooterComponent from "../../../components/footer/FooterComponent";
 import FetchData from "../../../components/api/Fetch.api";
-import MessageService from "../../../service/MessageService";
-import product from "../../../components/defined/Product";
+import MessageService from "../../../dto/message.dto";
 import ProductMapper from "../../../mapper/product.mapper";
 import CategoryMapper from "../../../mapper/category.mapper";
+import productDto from "../../../dto/product.dto";
+import categoryDto from "../../../dto/category.dto";
 
 
 
@@ -67,12 +68,12 @@ const AdminManages = () => {
             {
                 key: '1',
                 label: 'Quản lý phẩm',
-                children: <Table columns={product.adminProductColumns} dataSource={displayData}/>,
+                children: <Table columns={productDto.adminManagerColumn} dataSource={displayData}/>,
             },
             {
                 key: '2',
                 label: 'Quản lý Hãng',
-                children: <Table columns={product.adminCategoryColumns} dataSource={displayData}/>,
+                children: <Table columns={categoryDto.adminManagerColumn} dataSource={displayData}/>,
             },
         ]
     }

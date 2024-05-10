@@ -2,8 +2,8 @@ import {Badge, Divider, Empty, Popover} from "antd";
 import {BellOutlined} from "@ant-design/icons";
 import React, {useEffect, useState} from "react";
 import FetchApi from "../api/Fetch.api";
-import webService from "../../service/webService";
 import {useNavigate} from "react-router-dom";
+import noticeDto from "../../dto/notice.dto";
 
 
 const NoticeComponent = () => {
@@ -22,7 +22,7 @@ const NoticeComponent = () => {
                     <Divider style={{marginTop: "0px"}}/>
                     <div>
                         {res.map(notice => {
-                            let ntId = notice[webService.maskNotice[notice.title].name].toString();
+                            let ntId = notice[noticeDto.maskNotice[notice.title].name].toString();
                             if (ntId.length < 4) {
                                 ntId = '0'.repeat(4 - ntId.length) + ntId;
                             }
@@ -37,7 +37,7 @@ const NoticeComponent = () => {
                                 }}>
                                     <div>
                                         <Divider style={{marginBottom: '0px'}}/>
-                                        {webService.maskNotice[notice.title].title} số {ntId}
+                                        {noticeDto.maskNotice[notice.title].title} số {ntId}
                                         <Divider style={{marginTop: '0px', marginBottom: '0px'}}/>
 
                                         <div style={{minHeight: '75px'}}>

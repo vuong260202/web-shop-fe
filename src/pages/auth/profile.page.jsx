@@ -6,7 +6,7 @@ import {Avatar, Button, Form, Input, Layout, notification, Upload} from "antd";
 import Sider from "antd/es/layout/Sider";
 import FetchApi from "../../components/api/Fetch.api";
 import {UploadOutlined, UserOutlined} from "@ant-design/icons";
-import MessageService from "../../service/MessageService";
+import MessageService from "../../dto/message.dto";
 import FooterComponent from "../../components/footer/FooterComponent";
 
 const ProfilePage = () => {

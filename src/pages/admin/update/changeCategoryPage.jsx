@@ -3,7 +3,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import FetchApi from "../../../components/api/Fetch.api";
 import Header from "../../../components/header/Header";
 import {Button, Input, notification, Rate, Select} from "antd";
-import MessageService from "../../../service/MessageService";
+import MessageService from "../../../dto/message.dto";
 import AuthService from "../../../service/AuthService";
 import FooterComponent from "../../../components/footer/FooterComponent";
 

@@ -1,2 +1,0 @@
-let adminItems;
-export default {}

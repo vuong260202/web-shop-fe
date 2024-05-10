@@ -2,7 +2,7 @@ import {notification} from "antd";
 import React, {useEffect, useState} from "react";
 import FetchApi from "../../api/Fetch.api";
 import UploadCategoryForm from "../../form/UploadCategory.form";
-import message from "../../../service/MessageService";
+import message from "../../../dto/message.dto";
 import UploadProduct from "../../form/UploadProduct.form";
 
 const Category = () => {

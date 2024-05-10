@@ -2,8 +2,8 @@ import {Form, Input, notification} from "antd";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import FetchData from "../api/Fetch.api";
-import message from "../../service/MessageService";
-import MessageService from "../../service/MessageService";
+import message from "../../dto/message.dto";
+import MessageService from "../../dto/message.dto";
 
 const SignupForm = () => {
     const navigate = useNavigate()

@@ -2,7 +2,7 @@ import {notification} from "antd";
 import React, {useEffect, useState} from "react";
 import FetchApi from "../../api/Fetch.api";
 import UploadProduct from "../../form/UploadProduct.form";
-import message from "../../../service/MessageService";
+import message from "../../../dto/message.dto";
 import {useNavigate} from "react-router-dom";
 
 const Product = () => {

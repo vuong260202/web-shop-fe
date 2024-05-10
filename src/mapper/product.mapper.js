@@ -26,6 +26,23 @@ const ProductMapper = {
                 </div>)
             })
         )
+    },
+    ProductListToDataExport: (products) => {
+        return products.map((product, index) => {
+            product.index = index + 1;
+            product.totalRate = product.totalRate ?? 0;
+
+            return product;
+        })
+    },
+    ProductListToProductStatistic: (products) => {
+        return products.map((product, index) => {
+            product.index = index + 1;
+            product.totalRate = product.totalRate ?? 0;
+            product.productName = <a href={`/${product.id}/detail`}>{product.productName}</a>;
+
+            return product;
+        })
     }
 }
 

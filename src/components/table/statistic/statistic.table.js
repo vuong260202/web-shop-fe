@@ -1,14 +1,18 @@
 import {Button, Form, Select, Table} from "antd";
 import React, {useEffect, useState} from "react";
-import tableColumn from "../../defined/tableColumn";
 import FetchApi from "../../api/Fetch.api";
 import {SearchOutlined} from "@ant-design/icons";
 import {CSVLink} from "react-csv";
+import ProductMapper from "../../../mapper/product.mapper";
+import CategoryMapper from "../../../mapper/category.mapper";
+import transactionDto from "../../../dto/transaction.dto";
+import ProductDto from "../../../dto/product.dto";
+import categoryDto from "../../../dto/category.dto";
 
 const StatisticTable = ({parentType, query}) => {
     const [data, setData] = useState([]);
     const [dataExport, setDataExport] = useState([]);
-    const [now, setNow] = useState(new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" })));
+    const [now] = useState(new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Ho_Chi_Minh" })));
     const [year, setYear] = useState({
         value: now.getFullYear(),
         label: now.getFullYear().toString()
@@ -63,52 +67,20 @@ const StatisticTable = ({parentType, query}) => {
     }, [parentType, query]);
 
     const handleSearch = (condition) => {
-        console.log(parentType);
         console.log("parentType", parentType)
         if (parentType === '1') {
             FetchApi.productAPI.filterStatistic(condition).then((res) => {
-                console.log('success');
-                console.log(res);
+                console.log('success', res);
                 if (res) {
-                    let dte = JSON.parse(JSON.stringify(res));
-                    let dt = JSON.parse(JSON.stringify(res));
-
-                    dte.products.map((product, index) => {
-                        product.index = index + 1;
-                        product.totalRate = product.totalRate ?? 0
-                        return product
-                    });
-
-                    dt.products.map((product, index) => {
-                        product.index = index + 1;
-                        product.totalRate = product.totalRate ?? 0;
-                        product.productName = <a href={`/${product.id}/detail`}>{product.productName}</a>;
-                        return product
-                    });
-                    setDataExport(dte.products)
-                    setData(dt.products);
+                    setDataExport(ProductMapper.ProductListToDataExport((JSON.parse(JSON.stringify(res))).products));
+                    setData(ProductMapper.ProductListToProductStatistic((JSON.parse(JSON.stringify(res))).products));
                 }
             })
         } else {
             FetchApi.categoryAPI.filterStatistic(condition).then((res) => {
                 if (res) {
-                    let dte = JSON.parse(JSON.stringify(res));
-                    let dt = JSON.parse(JSON.stringify(res));
-
-                    dte.categories.map((category, index) => {
-                        console.log(category)
-                        category.index = index + 1;
-                        category.totalRate = category.totalRate ?? 0
-                    })
-
-                    dt.categories.map((category, index) => {
-                        console.log(category)
-                        category.index = index + 1;
-                        category.productName = <a href={`/${category.id}/detail`}>{category.productName}</a>;
-                        category.totalRate = category.totalRate ?? 0
-                    })
-                    setDataExport(dte.categories)
-                    setData(dt.categories);
+                    setDataExport(CategoryMapper.CategoryListToDataExport((JSON.parse(JSON.stringify(res))).categories));
+                    setData(CategoryMapper.CategoryListToCategoryStatistic((JSON.parse(JSON.stringify(res))).categories));
                 }
             })
         }
@@ -155,8 +127,8 @@ const StatisticTable = ({parentType, query}) => {
                 <div style={{marginRight: '5px', marginTop: '-22px'}}>
                     <CSVLink data={dataExport}
                              headers={parentType === '1'
-                                 ? tableColumn.csv.header.product
-                                 : tableColumn.csv.header.category}
+                                 ? transactionDto.csv.productHeader
+                                 : transactionDto.csv.categoryHeader}
                              separator={';'}
                              filename={`data-${parentType === '1' ? 'product':'category'}-${month.value === 0 ? 'all':month.label}-${year.value === 0 ? 'all':year.label}.csv`}
                     >
@@ -166,7 +138,7 @@ const StatisticTable = ({parentType, query}) => {
             </div>
             <div style={{flexGrow: 5}}>
                 <Table
-                    columns={parentType === '1' ? tableColumn.column.statistic.product : tableColumn.column.statistic.category}
+                    columns={parentType === '1' ? ProductDto.statisticColumn : categoryDto.statisticColumn}
                     dataSource={data}
                 />
             </div>
