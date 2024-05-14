@@ -39,7 +39,7 @@ const Header = ({onSearch}) => {
                 <Col span={5}>
                     <a href={`/`} style={{textAlign: "center", color: "black"}}>
                         {/*<img src={config.app.url + "/img/logo.jpg"} alt="logo" className="img-logo"/>*/}
-                        <h2>ABC Shop</h2>
+                        <h2>Trendy Store</h2>
                     </a>
                 </Col>
                 <Col span={14}>

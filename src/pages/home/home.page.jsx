@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from 'react-router-dom';
 import "../../style/Home.css";
 import Header from '../../components/header/Header'
 import FetchData from '../../components/api/Fetch.api';
 import CarouselHome from "../../components/home/CarouselHome";
 import NewProducts from "../../components/home/NewProducts";
 import SellingProducts from "../../components/home/SellingProducts";
-import {Footer} from "antd/es/modal/shared";
 import FooterComponent from "../../components/footer/FooterComponent";
 
 const Home = () => {
@@ -28,7 +26,7 @@ const Home = () => {
     return (
         <div style={{backgroundColor: 'rgba(89,87,87,0.8)'}}>
             <Header/>
-            <CarouselHome/>
+            {/*<CarouselHome/>*/}
             <div style={{backgroundColor: 'rgba(245,242,242,0.8)'}}>
                 <h2 style={{padding: "16px 10px"}}>Sản phẩm mới</h2>
                 <div style={{margin: '0px 0px', alignItems: "center", textAlign: "center"}}>

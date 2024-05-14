@@ -1,10 +1,8 @@
-import {Button, Drawer, Form, Input, notification, Rate} from "antd";
+import {notification} from "antd";
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import FetchData from "../../components/api/Fetch.api";
-import AuthService from "../../service/AuthService";
 import "../../style/ProductDetail.css"
-import message from "../../dto/message.dto";
 import Detail from "../../components/product/detail/productDetail";
 import ProductRate from "../../components/product/detail/productRate";
 import FooterComponent from "../../components/footer/FooterComponent";

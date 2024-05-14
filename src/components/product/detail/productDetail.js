@@ -1,20 +1,18 @@
-import {Button, Image, notification, Rate, Select} from "antd";
-import {DownSquareOutlined, UpSquareOutlined} from "@ant-design/icons";
+import {Button, Image, notification, Rate} from "antd";
 import React, {useState} from "react";
 import AuthService from "../../../service/AuthService";
 import message from "../../../dto/message.dto";
 import FetchData from "../../api/Fetch.api";
 import {useNavigate} from "react-router-dom";
 import ProductCompare from "../../modal/productCompare.productDetail";
-import BuyerInfo from "../../modal/buyerInfo.productDetail";
+import CreateTransaction from "../../modal/createTransaction.productDetail";
 
 const Detail = ({product}) => {
     const navigate = useNavigate();
-    const [count, setCount] = useState(1);
-    const [size, setSize] = useState(undefined);
     const [api, contextHolder] = notification.useNotification();
-    const [openModalBuyerInfo, setOpenModalBuyerInfo] = useState(false);
     const [openModalCompare, setOpenModalCompare] = useState(false);
+    const [openModalCreateTransaction, setOpenModalCreateTransaction] = useState(false);
+    const [pathImage, setPathImage] = useState(product.path);
 
     const openNotification = (type) => {
         api.info({
@@ -22,24 +20,15 @@ const Detail = ({product}) => {
         });
     };
 
-    const handleIncNumber = () => {
-        setCount(count + 1)
-    }
-
-    const handleDecNumber = () => {
-        if (count > 1) setCount(count - 1);
-    }
-
     const handleTransaction = ({isAccept, buyerInfo}) => {
-
-        if (!size) {
-            openNotification(message.contextType.fieldEmpty.size)
-            return false;
+        if (!isAccept) {
+            setOpenModalCreateTransaction(true);
+            return;
         }
 
-        if (!isAccept) {
-            setOpenModalBuyerInfo(true);
-            return;
+        if (!buyerInfo || !buyerInfo.size) {
+            openNotification(message.contextType.fieldEmpty.size)
+            return false;
         }
 
         if (!buyerInfo || buyerInfo.name === undefined || buyerInfo.name.trim() === '') {
@@ -60,17 +49,17 @@ const Detail = ({product}) => {
         let conditions = {
             productId: product.id,
             name: buyerInfo.name.trim(),
-            size,
+            size: buyerInfo.size,
             numberPhone: buyerInfo.numberPhone.trim(),
             address: buyerInfo.address.trim(),
-            count,
-            total: count * product.price,
+            count: buyerInfo.count,
+            total: buyerInfo.count * product.price,
         }
 
         FetchData.transactionAPI.add(conditions).then((res) => {
             console.log(res);
             if (res) {
-                setOpenModalBuyerInfo(false)
+                setOpenModalCreateTransaction(false)
                 openNotification(message.contextType.success.buy);
                 if (AuthService.isLoggedIn()) {
                     setTimeout(() => navigate('/transaction/history'), 3000)
@@ -81,29 +70,27 @@ const Detail = ({product}) => {
 
     return (<div>
         {contextHolder}
-        {product && <div style={{display: "flex", padding: "30px 30px"}}>
+        {product &&
+        <div style={{display: "flex", padding: "30px 30px"}}>
             <div style={{
                 flex: 3.2, backgroundColor: "#eacbcb", width: "300px", display: "flex", flexDirection: "column"
             }}>
-                <div style={{flexGrow: 3, margin: "2px", display: "flex", flexDirection: "column"}}>
-                    <div style={{flexGrow: 7, height: "90%"}}>
+                    <div style={{flex: 5, height: "100%", textAlign: "right"}}>
                         <Image
                             width={'100%'}
-                            height={'100%'}
-                            src={`http://localhost:3001` + product.path}
+                            height={'400px'}
+                            src={`http://localhost:3001` + pathImage}
                         />
                     </div>
-                    {/*<div style={{flexGrow: 1}}/>*/}
-                    {/*<div style={{flexGrow: 3, height: "100%"}}>*/}
-                    {/*    <Image*/}
-                    {/*        height={'80px'}*/}
-                    {/*        src={`http://localhost:3001` + product.path}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
-                </div>
             </div>
             <div style={{flex: 4, backgroundColor: "#f1dede", display: "flex", flexDirection: "column"}}>
                 <div className={"product-information"} style={{flexGrow: 8}}>
+                    <div style={{marginTop: '0px', marginBottom: '-50px', textAlign: "right"}}>
+                        <Button
+                            onClick={() => setOpenModalCompare(true)}
+                            style={{width: "100px"}}
+                        > So sánh </Button>
+                    </div>
                     <h3>{product.productName}</h3>
                     <div style={{display: "flex", marginBottom: "8px"}}>
                         <div style={{flex: 2}}>
@@ -131,65 +118,28 @@ const Detail = ({product}) => {
                     </div>
                     <div style={{display: "flex", marginBottom: "8px"}}>
                         <div style={{flex: 2}}>
-                            Số lượng đã bán:
-                        </div>
-                        <div style={{flex: 6}}>
-                            {product.productStatistic.totalCount}
-                        </div>
-                    </div>
-                    <div style={{display: "flex", marginBottom: "8px"}}>
-                        <div style={{flex: 2}}>
                             Giá bán:
                         </div>
                         <div style={{flex: 6}}>
                             {product.price}
                         </div>
                     </div>
-                    <div style={{display: "flex", marginBottom: "8px", alignItems: "center"}}>
-                        <div style={{flex: 2}}>
-                            Kích thước:
-                        </div>
-                        <div style={{flex: 6, display: "flex"}}>
-                            <Select
-                                defaultValue="choose"
-                                style={{
-                                    width: "300px",
-                                }}
-                                onChange={(value) => setSize(value)}
-                                options={product.sizes.map(size => {
-                                    return {
-                                        label: size, value: size
-                                    }
-                                })}
-                            />
-                        </div>
-                    </div>
-                    <div style={{display: "flex", marginBottom: "8px"}}>
-                        <div style={{flex: 2}}>
-                            Số lượng:
-                        </div>
-                        <div style={{flex: 6}}>
-                            <DownSquareOutlined onClick={handleDecNumber}/>
-                            {`${count}`} <UpSquareOutlined onClick={handleIncNumber}/>
-                        </div>
-                    </div>
-                    <div style={{display: "flex", marginBottom: "8px"}}>
-                        <div style={{flex: 2}}>
-                            Tổng tiền:
-                        </div>
-                        <div style={{flex: 6}}>
-                            {count * product.price}
-                        </div>
-                    </div>
                 </div>
-                <div style={{flexGrow: 2, alignItems: "center", textAlign: "center"}}>
+                <div style={{flexGrow: 2, alignItems: "center", textAlign: "center", marginBottom: "-50px"}}>
                     <Button style={{backgroundColor: "#458fc5"}} onClick={handleTransaction}>Mua</Button>
                 </div>
             </div>
         </div>}
         <>
-            {openModalBuyerInfo && <BuyerInfo setOpen={setOpenModalBuyerInfo} handleTransaction={handleTransaction}/>}
-            {openModalCompare && <ProductCompare setOpen={setOpenModalCompare}/>}
+            {openModalCreateTransaction
+                && <CreateTransaction
+                    setOpen={setOpenModalCreateTransaction}
+                    handleTransaction={handleTransaction}
+                    product={product} />}
+            {openModalCompare
+                && <ProductCompare
+                    setOpen={setOpenModalCompare}
+                    productId={product.id}/>}
         </>
     </div>);
 }
