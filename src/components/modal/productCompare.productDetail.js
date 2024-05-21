@@ -29,6 +29,7 @@ const ProductCompare = ({setOpen, productId}) => {
             onOk={() => {
                 handleCompareProduct();
             }}
+            closable={false}
             onCancel={() => {
                 setOpen(false);
             }}

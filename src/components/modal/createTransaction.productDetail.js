@@ -27,6 +27,7 @@ const CreateTransaction = ({setOpen, product, handleTransaction}) => {
         <Modal
             title={isBuyerInfo ? "Nhập thông tin cá nhân" : "Nhập thông tin sản phẩm"}
             centered
+            closable={false}
             open={true}
             onOk={() => {
                 if (!isBuyerInfo) {

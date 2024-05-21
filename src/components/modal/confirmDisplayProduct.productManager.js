@@ -30,7 +30,8 @@ const ConfirmDisPlay = ({productId, categoryId, status, setOpen}) => {
         <Modal title={title}
                open={true}
                centered
-               width={'350px'}
+                closable={false}
+               width={'400px'}
                footer={<div style={{ display: 'flex', justifyContent: 'center', marginTop: "30px" }}>
                    <Button key="back" onClick={() => setOpen(false)} style={{ width: '100px', margin: '0 10px' }}>
                        Cancel
