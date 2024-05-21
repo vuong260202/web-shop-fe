@@ -8,23 +8,7 @@ import {useNavigate} from "react-router-dom";
 const Product = () => {
     const [data, setData] = useState(null);
     const [api, contextHolder] = notification.useNotification();
-    const [imageUrl, setImageUrl] = useState(undefined);
     const navigate = useNavigate();
-
-    const handleFileChange = (event) => {
-        try {
-            const selectedFile = event.target.files[0];
-
-            const reader = new FileReader();
-            reader.onload = () => {
-                setImageUrl(reader.result);
-            };
-            reader.readAsDataURL(selectedFile);
-        } catch (e) {
-            setImageUrl(undefined);
-            // console.log(e);
-        }
-    };
 
     const openNotification = (type) => {
         api.info({
@@ -52,7 +36,7 @@ const Product = () => {
     }
 
     useEffect(() => {
-        setImageUrl(undefined);
+        // setImageUrl(undefined);
         FetchApi.categoryAPI.filter().then(res => {
             setData(res?.map(category => {
                 return {
@@ -64,25 +48,12 @@ const Product = () => {
     }, []);
 
     return (
-        <div style={{textAlign: "center", alignItems: "center", marginLeft: "20px", height: "457px", display: "flex"}}>
-
-            <div style={{flex: 5}}>
-                    <UploadProduct
-                        handleProduct={handleProduct}
-                        handleFileChange={handleFileChange}
-                        data={data}
-                    />
-            </div>
-            <div style={{flex: 3, textAlign: "center"}}>
-                {imageUrl && (
-                    <img
-                        src={imageUrl}
-                        alt="Selected"
-                        style={{maxWidth: '100%', maxHeight: '250px'}}
-                    />
-                )}
-            </div>
-            {contextHolder}
+        <div style={{textAlign: "center", alignItems: "center", marginLeft: "130px"}}>
+                <UploadProduct
+                    handleProduct={handleProduct}
+                    data={data}
+                />
+                {contextHolder}
         </div>
     )
 }

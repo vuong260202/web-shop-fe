@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import "../../style/Home.css";
 import Header from './Header';
-import AuthService from "../../service/AuthService";
+import AuthService from "../../utils/AuthUtil";
 
 const ProductItem = ({product}) => {
     return (

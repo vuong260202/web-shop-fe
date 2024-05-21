@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {BrowserRouter as Router, Route, Routes,} from "react-router-dom";
 import {routes} from "./routes";
-import AuthService from "./service/AuthService";
+import AuthService from "./utils/AuthUtil";
 import FetchApi from "./components/api/Fetch.api";
-import webService from "./service/webService";
+import webService from "./utils/webUtil";
+import FooterComponent from "./components/footer/FooterComponent";
+import Header from "./components/header/Header";
 
 const App = () => {
     useEffect(() => {
@@ -26,7 +28,17 @@ const App = () => {
                     return (
                         <Route
                             path={route.path}
-                            element={<Page />}
+                            element={
+                                <div style={{
+                                    height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                }}>
+                                    <Page />
+                                    <FooterComponent />
+                                </div>
+
+                            }
                         />
                     );
                 })}

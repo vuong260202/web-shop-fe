@@ -1,6 +1,6 @@
 import axios from "axios";
-import APIService from "../../../service/APIService";
-import AuthService from "../../../service/AuthService";
+import APIService from "../../../utils/APIUtil";
+import AuthService from "../../../utils/AuthUtil";
 
 const update = async (body) => {
     const res = await axios.post('http://localhost:3000/rate/update',

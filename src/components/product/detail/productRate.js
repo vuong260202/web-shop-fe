@@ -1,6 +1,6 @@
 import {Button, Input, Popconfirm, Rate, Statistic} from "antd";
 import React, {useEffect, useState} from "react";
-import AuthService from "../../../service/AuthService";
+import AuthService from "../../../utils/AuthUtil";
 import message from "../../../dto/message.dto"
 import FetchData from "../../api/Fetch.api";
 import {QuestionCircleOutlined, SendOutlined, UserOutlined, StarOutlined, WechatOutlined} from '@ant-design/icons';

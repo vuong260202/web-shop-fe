@@ -1,7 +1,7 @@
 import CONFIG from "../../../config";
 import axios from "axios";
-import AuthService from "../../../service/AuthService";
-import APIService from "../../../service/APIService";
+import AuthService from "../../../utils/AuthUtil";
+import APIService from "../../../utils/APIUtil";
 
 
 const getAll = async () => {

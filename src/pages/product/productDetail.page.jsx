@@ -69,7 +69,6 @@ const ProductDetail = ({isLoggedIn}) => {
                         </div>
                     </div>
                 </div>}
-                <FooterComponent/>
         </div>
     )
 };

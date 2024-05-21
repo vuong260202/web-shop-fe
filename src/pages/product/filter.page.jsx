@@ -5,7 +5,6 @@ import "../../style/Home.css";
 import Header from '../../components/header/Header'
 import FetchData from '../../components/api/Fetch.api';
 import Product from "../../components/filter/Product";
-import FooterComponent from "../../components/footer/FooterComponent";
 
 const Filter = () => {
     const [products, setProducts] = useState([]);
@@ -57,9 +56,9 @@ const Filter = () => {
     }, []);
 
     return (
-        <div>
+        <div style={{backgroundColor: 'rgba(89,87,87,0.8)'}}>
             <Header onSearch={handleSearch} />
-            <div style={{display: 'flex', flexDirection: "column", height: "500px"}}>
+            <div style={{display: 'flex', flexDirection: "column", backgroundColor: "white"}}>
                 <div style={{flexGrow: 15}}>
                     <div>
                         {optionsCategory && <div style={{alignItems: "center", display: "flex", margin: "20px"}}>
@@ -87,21 +86,22 @@ const Filter = () => {
                     </div>
                     <Divider/>
                     <div>
-                        {!products.length ? <Empty/> :
+                        {!products.length ? <Empty style={{height: '350px'}}/> :
                             <div>
-                                <div style={{margin: '0px 0px', alignItems: "center", textAlign: "center"}}>
+                                <div style={{alignItems: "center", textAlign: "center"}}>
                                     <Product data={products}/>
                                 </div>
                                 <div className="pageination">
-                                    <Pagination current={page} defaultCurrent={1} total={total}
-                                                onChange={(newPage) => setPage(newPage)}/>
+                                    <Pagination
+                                        current={page}
+                                        defaultCurrent={1}
+                                        total={total}
+                                        onChange={(newPage) => setPage(newPage)}
+                                    />
                                 </div>
                             </div>
                         }
                     </div>
-                </div>
-                <div style={{flexGrow: 0.2}}>
-                        <FooterComponent />
                 </div>
             </div>
         </div>

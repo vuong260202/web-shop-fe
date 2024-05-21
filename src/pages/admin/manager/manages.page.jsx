@@ -1,7 +1,7 @@
 import Header from "../../../components/header/Header";
 import {Modal, notification, Table, Tabs} from "antd";
 import React, {useEffect, useState} from "react";
-import AuthService from "../../../service/AuthService";
+import AuthService from "../../../utils/AuthUtil";
 import {useNavigate} from "react-router-dom";
 import FooterComponent from "../../../components/footer/FooterComponent";
 import FetchData from "../../../components/api/Fetch.api";
@@ -147,9 +147,6 @@ const AdminManages = () => {
                             align: "center",
                         }}
                     />
-            </div>
-            <div style={{flexGrow: 1}}>
-                <FooterComponent />
             </div>
             {openConfirm && <ConfirmDisPlay
                 productId={productId}

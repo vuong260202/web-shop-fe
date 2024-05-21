@@ -26,20 +26,18 @@ const Home = () => {
     return (
         <div style={{backgroundColor: 'rgba(89,87,87,0.8)'}}>
             <Header/>
-            {/*<CarouselHome/>*/}
-            <div style={{backgroundColor: 'rgba(245,242,242,0.8)'}}>
+            <div style={{backgroundColor: 'rgba(245,242,242,0.8)', margin: '10px'}}>
                 <h2 style={{padding: "16px 10px"}}>Sản phẩm mới</h2>
-                <div style={{margin: '0px 0px', alignItems: "center", textAlign: "center"}}>
+                <div style={{alignItems: "center", textAlign: "center"}}>
                     <NewProducts data={newProducts}/>
                 </div>
             </div>
-            <div style={{backgroundColor: 'rgba(245,242,242,0.8)'}}>
+            <div style={{backgroundColor: 'rgba(245,242,242,0.8)', margin: '10px'}}>
                 <h2 style={{padding: "16px 10px"}}>Sản phẩm bán chạy</h2>
-                <div style={{margin: '0px 0px', alignItems: "center", textAlign: "center"}}>
+                <div style={{alignItems: "center", textAlign: "center"}}>
                     <SellingProducts data={sellingProducts}/>
                 </div>
             </div>
-            <FooterComponent />
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import React from "react";
-import {Switch} from "antd";
+import {Image, Rate, Switch} from "antd";
+import CONFIG from "../config";
 
 
 const ProductMapper = {
@@ -8,7 +9,7 @@ const ProductMapper = {
                 key: index + 1,
                 id: product.id,
                 productName: (<a href={`http://localhost:3001/${product.id}/detail`}>{product.productName}</a>),
-                price: product.price,
+                price: product.price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'}),
                 category: product.category.categoryName,
                 total: product.total,
                 path: product.path,
@@ -54,6 +55,19 @@ const ProductMapper = {
 
             return product;
         })
+    },
+    ProductToProductCompare(product) {
+        return {
+            productName: <h3 style={{textAlign: "center"}}>{product?.productName}</h3>,
+            price: product.price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'}),
+            size: product.sizes.toString(),
+            transactionCount: product.transactionCount ?? 0,
+            rating: <Rate allowHalf defaultValue={product.productStatistic.totalRate} disabled/>,
+            path: <Image
+                width={'200px'}
+                height={'200px'}
+                src={CONFIG.app.url + product.path}/>
+        };
     }
 }
 

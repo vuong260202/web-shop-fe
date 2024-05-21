@@ -1,8 +1,8 @@
 import {Avatar, Badge, Dropdown, Menu, Popover} from "antd";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import authService from "../../service/AuthService";
-import AuthService from "../../service/AuthService";
+import authService from "../../utils/AuthUtil";
+import AuthService from "../../utils/AuthUtil";
 import {UserOutlined} from '@ant-design/icons';
 import FetchApi from "../api/Fetch.api";
 import NoticeComponent from "../notice/notice";

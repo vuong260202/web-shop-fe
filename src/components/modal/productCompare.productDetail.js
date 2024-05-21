@@ -1,7 +1,9 @@
-import {Input, Modal} from "antd";
+import {Button, Input, Modal} from "antd";
 import FetchData from "../api/Fetch.api";
 import React, {useEffect, useRef, useState} from "react";
 import HandleCompare from "../product/compare/handleCompare";
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import ProductDetailService from "../../service/product/ProductDetailService";
 
 const ProductCompare = ({setOpen, productId}) => {
     const [productNames, setProductNames] = useState([]);
@@ -19,39 +21,31 @@ const ProductCompare = ({setOpen, productId}) => {
 
     const handleCompareProduct = () => {
         console.log("productCompare", productNames[suggestId]);
-        setOpenCompare(true);
+        if (productName !== '') {
+            setOpenCompare(true);
+        }
     }
 
     return (
         <Modal
             centered
             open={true}
-            onOk={() => {
-                handleCompareProduct();
-            }}
+            onOk={() => {handleCompareProduct()}}
             closable={false}
-            onCancel={() => {
-                setOpen(false);
-            }}
+            onCancel={() => setOpen(false)}
             width={600}>
             <div style={{textAlign: "center", marginBottom: "15px"}}>
                 Nhập tên sản phẩm so sánh
             </div>
-            <Input
+            {!openCompare ? <Input
                 value={productName}
-                onChange={(text) => {
-                    setProductName(text.target.value ?? '');
+                onChange={(text) => ProductDetailService.productCompare.input
+                    .handleInputChange({
+                        text: text.target.value ?? '',
+                        setText: setProductName,
+                        setSuggestNames: setProductNames
+                })}
 
-                    if (text.target.value && text.target.value?.length > 0) {
-                        FetchData.productAPI.getProductNames({
-                            query: text.target.value
-                        }).then(res => {
-                            setProductNames(res);
-                        })
-                    } else {
-                        setProductNames([]);
-                    }
-                }}
                 onKeyDown={(event) => {
                     if (event.key === 'ArrowDown' && suggestId < productNames.length - 1) {
                         // event.preventDefault(); // Prevent page scrolling
@@ -64,7 +58,16 @@ const ProductCompare = ({setOpen, productId}) => {
                         handleCompareProduct();
                     }
                 }}
-            />
+            /> : <Button
+                icon={<ArrowLeftOutlined />}
+                style={{width: "100px"}}
+                onClick={() => ProductDetailService.productCompare.button
+                        .handleButtonBack({
+                            setOpen: setOpenCompare,
+                            setName: setProductName,
+                            setListNames: setProductNames
+                        })
+            }/>}
             <div style={{maxHeight: '100px', overflowY: "scroll", margin: "5px"}}  ref={listRef}>
                 {!openCompare && productNames.length > 0 && productNames.map((productName, index) => {
                     return (

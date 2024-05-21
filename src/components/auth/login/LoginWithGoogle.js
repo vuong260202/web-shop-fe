@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import GoogleLogin, {GoogleLogout} from 'react-google-login';
 import {gapi} from "gapi-script";
 import FetchApi from "../../api/Fetch.api";
-import AuthService from "../../../service/AuthService";
+import AuthService from "../../../utils/AuthUtil";
 import {useNavigate} from "react-router-dom";
 import CONFIG from "../../../config";
 

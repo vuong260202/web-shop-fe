@@ -1,8 +1,8 @@
 import axios from "axios";
-import AuthService from "../../../service/AuthService";
+import AuthService from "../../../utils/AuthUtil";
 import CONFIG from "../../../config"
 import serverAPI from "../../../utils/serverAPI";
-import APIService from "../../../service/APIService";
+import APIService from "../../../utils/APIUtil";
 
 const allUsers = async () => {
     const res = await axios.get(CONFIG.server.url + serverAPI.url.allUsers,

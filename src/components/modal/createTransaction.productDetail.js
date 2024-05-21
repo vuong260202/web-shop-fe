@@ -1,7 +1,7 @@
 import {Form, Input, Modal, Select} from "antd";
 import React, {useEffect, useState} from "react";
 import {DownSquareOutlined, UpSquareOutlined} from "@ant-design/icons";
-import AuthService from "../../service/AuthService";
+import AuthService from "../../utils/AuthUtil";
 import FetchData from "../api/Fetch.api";
 
 const CreateTransaction = ({setOpen, product, handleTransaction}) => {

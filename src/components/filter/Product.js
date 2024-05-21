@@ -3,11 +3,8 @@ import ProductItem from "../product/ProductItem";
 
 
 const Product = ({data}) => {
-
-
     return (
-        <div>
-            <div style={{display: "flex", backgroundColor: "rgba(245, 242, 242, 0.8)"}}>
+            <div style={{display: "flex", backgroundColor: "rgba(245, 242, 242, 0.8)", margin: '10px'}}>
                 {data && (
                     <ul style={{
                         display: "flex",
@@ -21,7 +18,6 @@ const Product = ({data}) => {
                     </ul>
                 )}
             </div>
-        </div>
     );
 };
 export default Product;

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import Header from "../../components/header/Header";
-import AuthService from "../../service/AuthService";
+import AuthService from "../../utils/AuthUtil";
 import {useNavigate} from "react-router-dom";
 import {Avatar, Button, Form, Input, Layout, notification, Upload} from "antd";
 import Sider from "antd/es/layout/Sider";
@@ -152,7 +152,6 @@ const ProfilePage = () => {
                     </Layout.Content>
                 </Layout>}
             </div>
-            <FooterComponent />
         </div>
     );
 }

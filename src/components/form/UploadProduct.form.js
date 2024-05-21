@@ -1,13 +1,14 @@
 import {Button, Form, Input, Select} from "antd";
 import React, {useState} from "react";
 
-const UploadProduct = ({handleProduct, handleFileChange, data}) => {
+const UploadProduct = ({handleProduct, data}) => {
     const [file, setFile] = useState(null);
     const [productName, setProductName] = useState(null);
     const [category, setCategory] = useState(null);
     const [sizes, setSizes] = useState(null);
     const [price, setPrice] = useState(null);
     const [total, setTotal] = useState(null);
+    const [imageUrl, setImageUrl] = useState(undefined);
 
     const handleClick = () => {
         const formData = new FormData();
@@ -20,6 +21,22 @@ const UploadProduct = ({handleProduct, handleFileChange, data}) => {
 
         handleProduct(formData)
     }
+
+    const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
+        try {
+            const selectedFile = event.target.files[0];
+
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImageUrl(reader.result);
+            };
+            reader.readAsDataURL(selectedFile);
+        } catch (e) {
+            setImageUrl(undefined);
+            // console.log(e);
+        }
+    };
 
     return (<Form
         name="basic"
@@ -89,13 +106,23 @@ const UploadProduct = ({handleProduct, handleFileChange, data}) => {
             name="file"
             style={{alignItems: "center"}}
         >
-            <input type="file" style={{height: "20px"}} onChange={(event) => {
-                setFile(event.target.files[0]);
-                handleFileChange(event);
-            }}/>
+            <div style={{display: "flex"}}>
+                <input type="file" style={{height: "20px"}} onChange={(event) => handleFileChange(event)}/>
+
+                <div style={{height: '50px'}}>
+                    {imageUrl && (
+                        <img
+                            src={imageUrl}
+                            alt="Selected"
+                            style={{maxWidth: '50%', maxHeight: '200px'}}
+                        />
+                    )}
+                </div>
+
+            </div>
         </Form.Item>
 
-        <Form.Item style={{marginLeft: "70px"}}>
+        <Form.Item style={{marginLeft: "140px"}}>
             <Button type="primary" htmlType="submit" onClick={handleClick}>Thêm</Button>
         </Form.Item>
     </Form>);

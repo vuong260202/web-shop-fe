@@ -4,7 +4,7 @@ import FetchApi from "../../../components/api/Fetch.api";
 import Header from "../../../components/header/Header";
 import {Button, Input, notification, Rate, Select} from "antd";
 import MessageService from "../../../dto/message.dto";
-import AuthService from "../../../service/AuthService";
+import AuthService from "../../../utils/AuthUtil";
 import FooterComponent from "../../../components/footer/FooterComponent";
 
 
@@ -94,8 +94,6 @@ const ChangeCategoryPage = () => {
             </div>
             <nav style={{flex: 1}}/>
         </div>}
-
-        <FooterComponent />
     </div>)
 }
 

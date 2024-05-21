@@ -1,6 +1,6 @@
 import axios from "axios";
-import AuthService from "../../../service/AuthService";
-import APIService from "../../../service/APIService";
+import AuthService from "../../../utils/AuthUtil";
+import APIService from "../../../utils/APIUtil";
 
 const addFeedback = async (body) => {
     const res = await axios.post('http://localhost:3000/feedback/create', body, {

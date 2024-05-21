@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {QuestionCircleOutlined} from '@ant-design/icons';
 import FooterComponent from "../../../components/footer/FooterComponent";
 import Header from "../../../components/header/Header";
-import AuthService from "../../../service/AuthService";
+import AuthService from "../../../utils/AuthUtil";
 import StatisticTable from "../../../components/table/statistic/statistic.table";
 
 
@@ -57,9 +57,6 @@ const StatisticPage = () => {
             <div style={{display: "flex", flexDirection: "column", height: "600px"}}>
                 <div style={{flexGrow: 4}}>
                     {keyTabs && <Tabs defaultActiveKey="1" items={items} onChange={onChange}/>}
-                </div>
-                <div>
-                    <FooterComponent/>
                 </div>
             </div>
             {contextHolder}

@@ -184,8 +184,6 @@ const ChangeProductPage = () => {
                 </div>
             </div>
         </div>}
-
-        <FooterComponent />
     </div>)
 }
 

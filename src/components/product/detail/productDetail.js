@@ -1,6 +1,6 @@
 import {Button, Image, notification, Rate} from "antd";
 import React, {useState} from "react";
-import AuthService from "../../../service/AuthService";
+import AuthService from "../../../utils/AuthUtil";
 import message from "../../../dto/message.dto";
 import FetchData from "../../api/Fetch.api";
 import {useNavigate} from "react-router-dom";
@@ -121,7 +121,7 @@ const Detail = ({product}) => {
                             Giá bán:
                         </div>
                         <div style={{flex: 6}}>
-                            {product.price}
+                            {product.price.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'})}
                         </div>
                     </div>
                 </div>

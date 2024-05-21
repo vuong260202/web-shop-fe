@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import TransactionTable from "../../components/table/transaction/transaction.table";
 import message from "../../dto/message.dto";
 import {QuestionCircleOutlined} from '@ant-design/icons';
-import AuthService from "../../service/AuthService";
+import AuthService from "../../utils/AuthUtil";
 import FooterComponent from "../../components/footer/FooterComponent";
 import transactionDto from "../../dto/transaction.dto";
 import transactionMapper from "../../mapper/transaction.mapper";
@@ -153,11 +153,7 @@ const Transaction = () => {
 
         if (AuthService.isLoggedIn) {
             FetchData.transactionAPI.filters().then((res) => {
-                res?.map((transaction) => {
-                    transaction.key = transaction.id;
-                    transaction.productName = <a href={`/${transaction.product.id}/detail`}>{transaction.productName}</a>;
-                })
-                setData(res);
+                setData(transactionMapper.filterTransactionsToDisplayTransactions(res));
             });
         }
     }, []);
@@ -193,9 +189,6 @@ const Transaction = () => {
                 </div>
                 <div style={{flexGrow: 4}}>
                     <Tabs defaultActiveKey="1" items={items} onChange={onChange}/>
-                </div>
-                <div>
-                    <FooterComponent/>
                 </div>
             </div>
             {contextHolder}

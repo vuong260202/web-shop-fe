@@ -7,7 +7,6 @@ import UploadProduct from "../../form/UploadProduct.form";
 
 const Category = () => {
     const [api, contextHolder] = notification.useNotification();
-    const [imageUrl, setImageUrl] = useState(undefined);
 
     const openNotification = (type) => {
         api.info({
@@ -50,41 +49,11 @@ const Category = () => {
         handleCategory(formData);
     }
 
-    const handleImage = (event) => {
-        try {
-            const selectedFile = event.target.files[0];
-
-            const reader = new FileReader();
-            reader.onload = () => {
-                setImageUrl(reader.result);
-            };
-            reader.readAsDataURL(selectedFile);
-        } catch (e) {
-            setImageUrl(undefined);
-        }
-
-    };
-
-    useEffect(() => {
-        setImageUrl(undefined);
-    }, []);
-
-    return (<div style={{textAlign: "center", alignItems: "center", marginLeft: "20px", height: "457px", display: "flex"}}>
-        {contextHolder}
-        <div style={{flex: 5}}>
+    return (<div style={{textAlign: "center", alignItems: "center", marginLeft: "20px", height: "380px", display: "flex"}}>
+        <div style={{marginTop: "0px", marginLeft: "130px"}}>
             <UploadCategoryForm
-                handleImage={handleImage}
                 handleClick={handleClick}
             />
-        </div>
-        <div style={{flex: 3, textAlign: "center"}}>
-            {imageUrl && (
-                <img
-                    src={imageUrl}
-                    alt="Selected"
-                    style={{maxWidth: '100%', maxHeight: '250px'}}
-                />
-            )}
         </div>
         {contextHolder}
     </div>);

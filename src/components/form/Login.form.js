@@ -1,7 +1,7 @@
 import {Button, Form, Input, notification} from "antd";
 import React, {useState} from "react";
 import FetchData from "../api/Fetch.api";
-import AuthService from "../../service/AuthService";
+import AuthService from "../../utils/AuthUtil";
 import {useLocation, useNavigate} from "react-router-dom";
 import message from "../../dto/message.dto";
 

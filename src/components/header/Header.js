@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import "../../style/Header.css";
 import {SearchOutlined, SendOutlined, WechatOutlined, SmileOutlined} from '@ant-design/icons';
 
-import AuthService from "../../service/AuthService";
+import AuthService from "../../utils/AuthUtil";
 import Profile from "./Profile";
 import Auththen from "./Auththen";
 import {useNavigate} from "react-router-dom";
