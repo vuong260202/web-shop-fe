@@ -10,6 +10,7 @@ import ProductMapper from "../../../mapper/product.mapper";
 import CategoryMapper from "../../../mapper/category.mapper";
 import productDto from "../../../dto/product.dto";
 import categoryDto from "../../../dto/category.dto";
+import ConfirmDisPlay from "../../../components/modal/confirmDisplayProduct.productManager";
 
 
 
@@ -20,6 +21,10 @@ const AdminManages = () => {
     const [api, contextHolder] = notification.useNotification();
     const [open, setOpen] = useState(false);
     const [id, setId] = useState(null);
+    const [openConfirm, setOpenConfirm] = useState(false);
+    const [status, setStatus] = useState(null);
+    const [productId, setProductId] = useState(undefined);
+    const [categoryId, setCategoryId] = useState(undefined);
 
     const openNotification = (type) => {
         api.info({
@@ -40,7 +45,8 @@ const AdminManages = () => {
                 console.log(res.products);
                 setDisplayData(ProductMapper.ProductListToProductManager({
                     products: res.products,
-                    deleteClickEvent
+                    deleteClickEvent,
+                    changeStatusEvent
                 }));
             })
         } else {
@@ -48,9 +54,24 @@ const AdminManages = () => {
                 console.log(res);
                 setDisplayData(CategoryMapper.CategoryListToCategoryManager({
                     categories: res,
-                    deleteClickEvent
+                    deleteClickEvent,
+                    changeStatusEvent
                 }));
             })
+        }
+    }
+
+    const changeStatusEvent = ({productId, categoryId, status}) => {
+        if (productId) {
+            setProductId(productId);
+            setCategoryId(undefined);
+            setStatus(status);
+            setOpenConfirm(true);
+        } else if (categoryId) {
+            setProductId(undefined);
+            setCategoryId(categoryId);
+            setStatus(status);
+            setOpenConfirm(true);
         }
     }
 
@@ -88,12 +109,13 @@ const AdminManages = () => {
             navigate('/PageNotFound');
         }
 
-        getData();
+        getData({isAll: true});
     }, [key])
 
     let handleSearch = (query) => {
         getData({
-            query: query
+            query: query,
+            isAll: true
         })
     };
 
@@ -110,8 +132,7 @@ const AdminManages = () => {
                 }}
                 onCancel={() => setOpen(false)}
                 width={'600px'}
-            >
-            </Modal>
+            />
             <div style={{flexGrow: 0.5}}>
                 <Header onSearch={handleSearch}/>
             </div>
@@ -130,6 +151,11 @@ const AdminManages = () => {
             <div style={{flexGrow: 1}}>
                 <FooterComponent />
             </div>
+            {openConfirm && <ConfirmDisPlay
+                productId={productId}
+                categoryId={categoryId}
+                status={status}
+                setOpen={setOpenConfirm}/>}
         </div>
     )
 }

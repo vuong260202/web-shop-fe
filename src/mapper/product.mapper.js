@@ -1,8 +1,9 @@
 import React from "react";
+import {Switch} from "antd";
 
 
 const ProductMapper = {
-    ProductListToProductManager: ({products, deleteClickEvent}) => {
+    ProductListToProductManager: ({products, deleteClickEvent, changeStatusEvent}) => {
         return products.map((product, index) => ({
                 key: index + 1,
                 id: product.id,
@@ -20,6 +21,16 @@ const ProductMapper = {
                             style={{width: '100px', height: "auto"}}
                         />
                     </div>),
+                hide: (
+                    <Switch
+                        defaultChecked={product.status === 'active'}
+                        style={{width: '30px'}}
+                        value={product.status === 'active'}
+                        onClick={() => changeStatusEvent({
+                            productId: product.id,
+                            status: product.status === 'active'
+                        })}/>
+                ),
                 update: (<div>
                     <a href={`http://localhost:3001/admin/${product.id}/update`}>sửa</a> |
                     <a onClick={() => deleteClickEvent({productId: product.id,})}>xóa</a>

@@ -45,6 +45,22 @@ const categoryAPI = {
             .catch(response => APIService.handleResponse(response))
 
         return res;
+    },
+    updateStatus: async (body) => {
+        const res = await axios.post(
+            "http://localhost:3000/admin/update-category-status",
+            body,
+            {
+                headers: {
+                    Authorization: `Bearer ${AuthService.getToken()}`,
+                },
+            }
+        ).then((res) => APIService.handleResponseSuccess(res))
+            .catch((response) => APIService.handleResponse(response))
+
+        console.log(res);
+
+        return res;
     }
 }
 
@@ -94,6 +110,22 @@ const productAPI = {
             }
         ).then((res) => APIService.handleResponseSuccess(res))
             .catch((response) => APIService.handleResponse(response))
+
+        console.log(res);
+
+        return res;
+    },
+    updateStatus: async (body) => {
+        const res = await axios.post(
+            "http://localhost:3000/admin/update-product-status",
+            body,
+            {
+                headers: {
+                    Authorization: `Bearer ${AuthService.getToken()}`,
+                },
+            }
+        ).then((res) => APIService.handleResponseSuccess(res))
+           .catch((response) => APIService.handleResponse(response))
 
         console.log(res);
 

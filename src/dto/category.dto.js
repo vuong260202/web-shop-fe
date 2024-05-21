@@ -44,6 +44,10 @@ const categoryDto = {
             dataIndex: "updatedAt",
         },
         {
+            title: "hiển thị",
+            dataIndex: "hide",
+        },
+        {
             title: "ảnh",
             dataIndex: "image"
         },

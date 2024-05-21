@@ -67,12 +67,24 @@ const ProductDto = {
             dataIndex: "updatedAt",
         },
         {
+            title: "hiển thị",
+            dataIndex: "hide",
+        },
+        {
             title: "ảnh",
             dataIndex: "image"
         },
         {
             dataIndex: "update",
         }
+    ],
+    titleCompare: [
+        {productName: 'Tên'},
+        {path: 'Hình ảnh'},
+        {price: 'Giá'},
+        {size: 'Kích thước'},
+        {transactionCount: 'SL đã bán'},
+        {rating: 'Đánh giá'}
     ],
 }
 

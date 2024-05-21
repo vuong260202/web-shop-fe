@@ -1,8 +1,9 @@
 import React from "react";
+import {Switch} from "antd";
 
 
 const CategoryMapper = {
-    CategoryListToCategoryManager: ({categories, deleteClickEvent}) => {
+    CategoryListToCategoryManager: ({categories, deleteClickEvent, changeStatusEvent}) => {
         return categories.map((category, index) => ({
                 key: index + 1,
                 id: category.id,
@@ -17,6 +18,16 @@ const CategoryMapper = {
                             style={{width: '100px', height: "auto"}}
                         />
                     </div>),
+                hide: (
+                    <Switch
+                        defaultChecked={category.status === 'active'}
+                        style={{width: '30px'}}
+                        value={category.status === 'active'}
+                        onClick={() => changeStatusEvent({
+                            categoryId: category.id,
+                            status: category.status === 'active'
+                        })}/>
+                ),
                 update: (<div>
                     <a href={`http://localhost:3001/admin/${category.id}/category-update`}>sửa</a> |
                     <a onClick={() => deleteClickEvent({categoryId: category.id,})}>xóa</a>

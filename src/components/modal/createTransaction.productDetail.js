@@ -4,7 +4,7 @@ import {DownSquareOutlined, UpSquareOutlined} from "@ant-design/icons";
 import AuthService from "../../service/AuthService";
 import FetchData from "../api/Fetch.api";
 
-const CreateTransaction = ({setOpen, setOpenInfo, product, handleTransaction}) => {
+const CreateTransaction = ({setOpen, product, handleTransaction}) => {
     const [size, setSize] = useState(undefined);
     const [isBuyerInfo, setIsBuyerInfo] = useState(false);
     const [count, setCount] = useState(1);
