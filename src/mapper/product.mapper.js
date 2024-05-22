@@ -52,6 +52,7 @@ const ProductMapper = {
             product.index = index + 1;
             product.totalRate = product.totalRate ?? 0;
             product.productName = <a href={`/${product.id}/detail`}>{product.productName}</a>;
+            product.totalAmount = product.totalAmount.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
 
             return product;
         })
